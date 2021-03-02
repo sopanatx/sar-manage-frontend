@@ -8,7 +8,7 @@ const SomeText = () => {
   return (
     <>
       <Heading as="h2" fontSize="3xl">
-        Hello
+        ทดสอบ
       </Heading>
 
       <Box
