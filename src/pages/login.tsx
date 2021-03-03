@@ -4,13 +4,8 @@ import SomeText from "../components/SomeText";
 import SomeImage from "../components/SomeImage";
 import CTASection from "../components/CTASection";
 
-const Home = () => {
-  return (
-    <Box mb={8} w="full">
-      <SomeText />
-      <SomeImage />
-    </Box>
-  );
+const Login = () => {
+  return <p>h</p>;
 };
 
-export default Home;
+export default Login;

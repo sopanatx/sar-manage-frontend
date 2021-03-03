@@ -6,8 +6,8 @@ import ThemeToggle from "./ThemeToggle";
 const Header = () => {
   return (
     <Flex as="header" width="full" align="center">
-      <AccessibleLink href="/">
-        <Heading as="h1">EzyDoc - eDocument For Organization</Heading>
+      <AccessibleLink href="#">
+        <Heading as="h1">EzyDoc - Online Document Sharing</Heading>
       </AccessibleLink>
 
       <Box marginLeft="auto">
