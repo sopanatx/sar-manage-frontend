@@ -1,5 +1,5 @@
 import { Box, extendTheme, Heading, useColorMode } from "@chakra-ui/react";
-
+import { Text } from "@chakra-ui/react";
 import HelperImage from "./HelperImage";
 
 const SomeText = () => {
@@ -12,8 +12,10 @@ const SomeText = () => {
         padding={4}
         borderRadius={4}
       >
-        <Box d="flex" alignItems="center" fontSize="sm">
-          Secured Document Sharing For Organization
+        <Box d="flex" alignItems="center" fontSize="xl">
+          <Text fontSize="lg">
+            โปรดเข้าสู่ระบบด้วยข้อมูลของท่าน ก่อนดำเนินการอัปโหลดไฟล์
+          </Text>
         </Box>
       </Box>
     </>

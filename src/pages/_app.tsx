@@ -3,10 +3,8 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 
 import Layout from "../components/layout";
-
 import customTheme from "../styles/customTheme";
 import "../styles/globals.css";
-
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
@@ -20,9 +18,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           rel="stylesheet"
         ></link>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+
+      <Component {...pageProps} />
     </ChakraProvider>
   );
 };
