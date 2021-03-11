@@ -41,7 +41,7 @@ const Home = () => {
             <form>
               <FormControl>
                 <FormLabel>ชื่อผู้ใช้</FormLabel>
-                <Input type="email" placeholder="กรอกชื่อผู้ใช้งาน" />
+                <Input type="email" placeholder="กรอกชื่อผู้ใช้งาน" required />
               </FormControl>
 
               <FormControl mt={4}>
@@ -51,10 +51,10 @@ const Home = () => {
 
               <Stack isInline justifyContent="space-between" mt={4}>
                 <Box>
-                  <Checkbox>Remember Me</Checkbox>
+                  <Checkbox>จดจำการเข้าสู่ระบบ</Checkbox>
                 </Box>
                 <Box>
-                  <Link color={`${VARIANT_COLOR}.500`}>ลืมรหัสผ่าน?</Link>
+                  <Link color={`${VARIANT_COLOR}.500`}> ลืมรหัสผ่าน? </Link>
                 </Box>
               </Stack>
 
