@@ -25,12 +25,12 @@ import { AiFillHome, AiOutlineInbox } from "react-icons/ai";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-export default function App(props) {
+export default function App(props: any) {
   const { toggleColorMode: toggleMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
   const bg = useColorModeValue("white", "gray.800");
-  const ref = React.useRef();
+  const ref: any = React.useRef();
   const [y, setY] = React.useState(0);
   const { height = 0 } = ref.current ? ref.current.getBoundingClientRect() : {};
 
@@ -41,7 +41,7 @@ export default function App(props) {
   const cl = useColorModeValue("gray.800", "white");
   const mobileNav = useDisclosure();
 
-  const Section = (props) => {
+  const Section = (props: any) => {
     const ic = useColorModeValue("brand.600", "brand.50");
     const hbg = useColorModeValue("gray.50", "brand.400");
     const tcl = useColorModeValue("gray.900", "gray.50");
@@ -81,7 +81,7 @@ export default function App(props) {
     );
   };
 
-  const Features = (props) => {
+  const Features = (props: any) => {
     const hbg = useColorModeValue("gray.50", "brand.400");
     const hbgh = useColorModeValue("gray.100", "brand.500");
     const tcl = useColorModeValue("gray.900", "gray.50");
