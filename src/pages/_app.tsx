@@ -23,7 +23,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             rel="stylesheet"
           ></link>
         </Head>
-
         <Component {...pageProps} />
       </ChakraProvider>
     </ApolloProvider>
