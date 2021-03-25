@@ -41,7 +41,6 @@ const LoginForm = () => {
               เข้าสู่ระบบจัดการเอกสาร
             </Text>
             <form>
-              <Text color="red.300">DBG: {password}</Text>
               <FormControl isRequired>
                 <FormLabel>ชื่อผู้ใช้ </FormLabel>
                 <Input
