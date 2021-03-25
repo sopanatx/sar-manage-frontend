@@ -1,8 +1,8 @@
 {
-  "name": "nextchakra-starter",
+  "name": "sar-management-system",
   "version": "0.1.0",
   "private": true,
-  "author": "sozonome",
+  "author": "PLEUM STUDIO SOFTWARE DEVELOPEMENT.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
