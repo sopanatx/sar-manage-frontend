@@ -45,7 +45,7 @@ const LoginForm = () => {
                 alignItems="center"
                 marginBottom={10}
               >
-                {data.getServiceStatus.service}
+                {data.getServiceStatus.serviceName}
               </Text>
               <form>
                 <FormControl isRequired>
