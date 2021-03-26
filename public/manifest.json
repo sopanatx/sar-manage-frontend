@@ -1,7 +1,7 @@
 {
-  "short_name": "nextchakra-starter",
-  "name": "Next.js App Template",
-  "lang": "en",
+  "short_name": "sar-ms",
+  "name": "Next.js Sar Management System",
+  "lang": "th",
   "start_url": "/",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",

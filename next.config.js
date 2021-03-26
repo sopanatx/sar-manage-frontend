@@ -13,4 +13,5 @@ module.exports = withPWA({
     register: true,
   },
   target: "serverless",
+  compress:true,
 });
