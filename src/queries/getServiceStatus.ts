@@ -1,7 +1,11 @@
 import gql from "graphql-tag";
 const getServiceStatus = gql`
   query {
-    getServiceStatus
+    getServiceStatus {
+      status
+      serviceName
+      isInMaintenance
+    }
   }
 `;
 export default getServiceStatus;

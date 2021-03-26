@@ -15,14 +15,13 @@ import {
 import { useState } from "react";
 import { useQuery } from "react-apollo";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
-const VARIANT_COLOR: string = "orange";
+const VARIANT_COLOR: string = "green";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
 
 const LoginForm = () => {
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
-  console.log(data);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -46,7 +45,7 @@ const LoginForm = () => {
                 alignItems="center"
                 marginBottom={10}
               >
-                เข้าสู่ระบบจัดการเอกสาร
+                {data.getServiceStatus.serviceName}
               </Text>
               <form>
                 <FormControl isRequired>
