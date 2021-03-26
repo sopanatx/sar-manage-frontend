@@ -11,19 +11,40 @@ import {
   Text,
   Spinner,
   Divider,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
+import SIGN_IN, {
+  Credentials as UsernameCredentails,
+  SignInOutput,
+} from "../queries/signIn";
+import { useForm } from "react-hook-form";
 const VARIANT_COLOR: string = "orange";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
 
 const LoginForm = () => {
-  const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
+  const [signIn, { data: credentails }] = useMutation<SignInOutput>(SIGN_IN);
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = () => {
+    signIn({ variables: { input: { username, password } } })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log("err", error);
+      });
+  };
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
       {!loading && !error && data ? (
@@ -31,10 +52,11 @@ const LoginForm = () => {
           borderWidth={1}
           px={5}
           width="full"
-          maxWidth="500px"
+          maxWidth="600px"
           borderRadius={4}
           textAlign="center"
           boxShadow="lg"
+          onSubmit={handleSubmit(onSubmit)}
         >
           <Box p={10}>
             <Box my={8} textAlign="left">
@@ -48,6 +70,17 @@ const LoginForm = () => {
                 {data.getServiceStatus.serviceName}
               </Text>
               <form>
+                {errors.length > 0 ? (
+                  <>
+                    <Alert status="error">
+                      <AlertIcon />
+                      <AlertTitle mr={2}>Your browser is outdated!</AlertTitle>
+                      <AlertDescription>
+                        Your Chakra experience may be degraded.
+                      </AlertDescription>
+                    </Alert>{" "}
+                  </>
+                ) : null}
                 <FormControl isRequired>
                   <FormLabel>ชื่อผู้ใช้ </FormLabel>
                   <Input
@@ -83,7 +116,6 @@ const LoginForm = () => {
                   mt={4}
                   colorScheme={VARIANT_COLOR}
                   type="submit"
-                  onClick={() => testlalert()}
                 >
                   เข้าสู่ระบบ
                 </Button>
