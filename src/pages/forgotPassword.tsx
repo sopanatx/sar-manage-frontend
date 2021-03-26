@@ -22,7 +22,6 @@ const VARIANT_COLOR = "blue";
 const ForgotPassword = () => {
   return (
     <>
-      {" "}
       <ForgotPasswordForm />
     </>
   );

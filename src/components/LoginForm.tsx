@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import { useQuery } from "react-apollo";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
-const VARIANT_COLOR: string = "blue";
+const VARIANT_COLOR: string = "orange";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
@@ -82,7 +82,7 @@ const LoginForm = () => {
                   variantColor={VARIANT_COLOR}
                   width="full"
                   mt={4}
-                  colorScheme="blue"
+                  colorScheme={VARIANT_COLOR}
                   type="submit"
                   onClick={() => testlalert()}
                 >
@@ -94,7 +94,7 @@ const LoginForm = () => {
         </Box>
       ) : (
         <>
-          <Text>Connecting to the server...</Text>
+          <Text>กำลังโหลดข้อมูล...</Text>
         </>
       )}
     </Flex>
