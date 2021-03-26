@@ -94,7 +94,7 @@ const LoginForm = () => {
         </Box>
       ) : (
         <>
-          <Text>กำลังโหลดข้อมูล...</Text>
+          <Text>Connecting to the server...</Text>
         </>
       )}
     </Flex>
