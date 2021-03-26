@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import { useQuery } from "react-apollo";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
-const VARIANT_COLOR: string = "green";
+const VARIANT_COLOR: string = "orange";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
@@ -45,7 +45,7 @@ const LoginForm = () => {
                 alignItems="center"
                 marginBottom={10}
               >
-                {data.getServiceStatus.serviceName}
+                {data.getServiceStatus.service}
               </Text>
               <form>
                 <FormControl isRequired>
