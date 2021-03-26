@@ -69,7 +69,7 @@ const LoginForm = () => {
 
                 <Stack isInline justifyContent="space-between" mt={4}>
                   <Box>
-                    <Checkbox>จดจำการเข้าสู่ระบบ</Checkbox>
+                    <Checkbox colorScheme="orange">จดจำการเข้าสู่ระบบ</Checkbox>
                   </Box>
                   <Box>
                     <Link color={`${VARIANT_COLOR}.500`} href="login">
