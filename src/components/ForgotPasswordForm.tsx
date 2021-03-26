@@ -20,11 +20,8 @@ const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
 
-const LoginForm = () => {
+const ForgotPasswordForm = () => {
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
-  console.log(data);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
       {!loading && !error && data ? (
@@ -51,20 +48,7 @@ const LoginForm = () => {
               <form>
                 <FormControl isRequired>
                   <FormLabel>ชื่อผู้ใช้ </FormLabel>
-                  <Input
-                    type="text"
-                    placeholder="กรอกชื่อผู้ใช้งาน"
-                    onChange={(event) => setUsername(event.currentTarget.value)}
-                  />
-                </FormControl>
-
-                <FormControl mt={4} isRequired>
-                  <FormLabel>รหัสผ่าน</FormLabel>
-                  <Input
-                    type="password"
-                    placeholder="กรอกรหัสผ่าน"
-                    onChange={(event) => setPassword(event.currentTarget.value)}
-                  />
+                  <Input type="text" placeholder="กรอกชื่อผู้ใช้งาน" />
                 </FormControl>
 
                 <Stack isInline justifyContent="space-between" mt={4}>
@@ -84,7 +68,6 @@ const LoginForm = () => {
                   mt={4}
                   colorScheme="blue"
                   type="submit"
-                  onClick={() => testlalert()}
                 >
                   เข้าสู่ระบบ
                 </Button>
@@ -101,4 +84,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;
