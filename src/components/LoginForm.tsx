@@ -11,11 +11,16 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-const VARIANT_COLOR = "blue";
+import { useQuery } from "react-apollo";
+import GET_SERVICE_STATUS from "../queries/getServiceStatus";
+const VARIANT_COLOR: string = "blue";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
+
 const LoginForm = () => {
+  const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
+  console.log(data);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -31,6 +36,11 @@ const LoginForm = () => {
       >
         <Box p={4}>
           <Box my={8} textAlign="left">
+            {!loading && !error && data ? (
+              <Text>สถานะระบบ : {data.getServiceStatus}</Text>
+            ) : (
+              <Text>กำลังโหลด ....</Text>
+            )}
             <Text
               fontSize="2xl"
               fontWeight="bold"
@@ -65,8 +75,7 @@ const LoginForm = () => {
                 </Box>
                 <Box>
                   <Link color={`${VARIANT_COLOR}.500`} href="login">
-                    {" "}
-                    ลืมรหัสผ่าน?{" "}
+                    ลืมรหัสผ่าน?
                   </Link>
                 </Box>
               </Stack>
