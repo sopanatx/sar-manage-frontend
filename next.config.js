@@ -2,10 +2,9 @@ const withPWA = require("next-pwa");
 
 module.exports = withPWA({
   pwa: {
-    disable:false,
+    disable: false,
     dest: "public",
+    sw: "sw.js",
     register: true,
   },
-  target: "serverless",
-  compress:true,
 });

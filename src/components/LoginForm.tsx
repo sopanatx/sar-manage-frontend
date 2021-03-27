@@ -36,13 +36,14 @@ const LoginForm = () => {
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
   const [signIn, { data: credentails }] = useMutation<SignInOutput>(SIGN_IN);
   const { register, handleSubmit, errors } = useForm();
+  const [isError, setIsError] = useState(false);
   const onSubmit = () => {
     signIn({ variables: { input: { username, password } } })
       .then((result) => {
         console.log(result);
       })
       .catch((error) => {
-        console.log("err", error);
+        setIsError(true);
       });
   };
   return (
@@ -70,15 +71,14 @@ const LoginForm = () => {
                 {data.getServiceStatus.serviceName}
               </Text>
               <form>
-                {errors.length > 0 ? (
+                {isError ? (
                   <>
-                    <Alert status="error">
-                      <AlertIcon />
-                      <AlertTitle mr={2}>Your browser is outdated!</AlertTitle>
-                      <AlertDescription>
-                        Your Chakra experience may be degraded.
-                      </AlertDescription>
-                    </Alert>{" "}
+                    <Box my={2}>
+                      <Alert status="error">
+                        <AlertIcon />
+                        <AlertTitle mr={2}>เข้าสู่ระบบล้มเหลว</AlertTitle>
+                      </Alert>
+                    </Box>
                   </>
                 ) : null}
                 <FormControl isRequired>
