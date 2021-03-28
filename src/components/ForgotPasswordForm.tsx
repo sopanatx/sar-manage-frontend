@@ -43,7 +43,7 @@ const ForgotPasswordForm = () => {
                 alignItems="center"
                 marginBottom={10}
               >
-              เปลี่ยนเป็นข้อมูลเกี่ยวกับการขอรีเซ็ทรหัสผ่าน
+              กรอกข้อมูลชื่อผู้ใช้หรือEmailของท่าน
               </Text>
               <form>
                 <FormControl isRequired>
