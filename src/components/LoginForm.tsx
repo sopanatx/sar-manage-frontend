@@ -83,7 +83,7 @@ const LoginForm = () => {
                 {data.getServiceStatus.serviceName}
               </Text>
               <form>
-                {!authData && !loadings && authError ? (
+                {/* {!authData && !loadings && authError ? (
                   <>
                     <Alert status="error" variant="left-accent" my={8}>
                       <AlertIcon />
@@ -115,7 +115,7 @@ const LoginForm = () => {
                   </>
                 ) : (
                   <></>
-                )}
+                )} */}
                 <FormControl isRequired>
                   <FormLabel>ชื่อผู้ใช้ </FormLabel>
                   <Input
@@ -161,7 +161,31 @@ const LoginForm = () => {
         </Box>
       ) : (
         <>
-          <Text>Connecting to the server...</Text>
+          <Box
+            borderWidth={1}
+            px={5}
+            width="full"
+            maxWidth="600px"
+            borderRadius={4}
+            textAlign="center"
+            boxShadow="lg"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Box p={10}>
+              <Box my={8} textAlign="center">
+                <Text
+                  fontSize="1xl"
+                  fontWeight="bold"
+                  color="#4A5568"
+                  alignItems="center"
+                  marginBottom={10}
+                >
+                  {" "}
+                  Connecting to the server...
+                </Text>
+              </Box>
+            </Box>
+          </Box>
         </>
       )}
     </Flex>

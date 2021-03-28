@@ -62,7 +62,7 @@ const ForgotPasswordForm = () => {
                 กู้คืนรหัสผ่าน
               </Button>
               <Box my={8} textAlign="center">
-                <Link color={`${VARIANT_COLOR}.500`} href="/" passHref>
+                <Link color={`${VARIANT_COLOR}.500`} href="/">
                   กลับไปเพจก่อนหน้า
                 </Link>
               </Box>

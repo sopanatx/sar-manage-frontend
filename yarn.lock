@@ -7048,6 +7048,11 @@ react-native-get-random-values@^1.4.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
+react-recaptcha-x@^1.1.11:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/react-recaptcha-x/-/react-recaptcha-x-1.1.11.tgz#adad7ca7634f6152a3af5c99fd4abb1c59783e20"
+  integrity sha512-7k7vv+0wsvbo096FSicwoay96dq+NSUp/WPiMN65qlf8uoQdGW4afQBBYt2RkhZdCF0ZXrtc/0SISrAarYzmYA==
+
 react-refresh@0.8.3:
   version "0.8.3"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
@@ -7126,6 +7131,11 @@ readdirp@~3.5.0:
   integrity sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==
   dependencies:
     picomatch "^2.2.1"
+
+reaptcha@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/reaptcha/-/reaptcha-1.7.2.tgz#d829f54270c241f46501e92a5a7badeb1fcf372d"
+  integrity sha512-/RXiPeMd+fPUGByv+kAaQlCXCsSflZ9bKX5Fcwv9IYGS1oyT2nntL/8zn9IaiUFHL66T1jBtOABcb92g2+3w8w==
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
