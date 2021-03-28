@@ -24,8 +24,7 @@ const ForgotPasswordForm = () => {
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
-      {!loading && !error && data ? (
-        <Box
+     <Box
           borderWidth={1}
           px={5}
           width="full"
@@ -43,23 +42,15 @@ const ForgotPasswordForm = () => {
                 alignItems="center"
                 marginBottom={10}
               >
-                เข้าสู่ระบบจัดการเอกสาร
+              เปลี่ยนเป็นข้อมูลเกี่ยวกับการขอรีเซ็ทรหัสผ่าน
               </Text>
               <form>
                 <FormControl isRequired>
-                  <FormLabel>ชื่อผู้ใช้ </FormLabel>
-                  <Input type="text" placeholder="กรอกชื่อผู้ใช้งาน" />
+                  <FormLabel>ชื่อผู้ใช้ หรือ Email </FormLabel>
+                  <Input type="text" placeholder="กรอกชื่อผู้ใช้งาน / Email" />
                 </FormControl>
 
                 <Stack isInline justifyContent="space-between" mt={4}>
-                  <Box>
-                    <Checkbox>จดจำการเข้าสู่ระบบ</Checkbox>
-                  </Box>
-                  <Box>
-                    <Link color={`${VARIANT_COLOR}.500`} href="login">
-                      ลืมรหัสผ่าน?
-                    </Link>
-                  </Box>
                 </Stack>
 
                 <Button
@@ -69,17 +60,12 @@ const ForgotPasswordForm = () => {
                   colorScheme="blue"
                   type="submit"
                 >
-                  เข้าสู่ระบบ
+                  รีเซตรหัสผ่าน
                 </Button>
               </form>
             </Box>
           </Box>
         </Box>
-      ) : (
-        <>
-          <Text>Connecting to the server...</Text>
-        </>
-      )}
     </Flex>
   );
 };
