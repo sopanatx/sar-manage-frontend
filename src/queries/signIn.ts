@@ -3,6 +3,7 @@ const signIn = gql`
   mutation($input: LocalAuthDto!) {
     signIn(localAuthDto: $input) {
       accessToken
+      refreshToken
     }
   }
 `;

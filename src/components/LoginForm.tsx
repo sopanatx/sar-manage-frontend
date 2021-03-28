@@ -15,6 +15,8 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Spacer,
+  CloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-apollo";
@@ -25,6 +27,14 @@ import SIGN_IN, {
   SignInOutput,
 } from "../queries/signIn";
 import { useForm } from "react-hook-form";
+import React from "react";
+
+interface AuthResponse {
+  data: string;
+  error: string;
+  loading: boolean;
+}
+
 const VARIANT_COLOR: string = "orange";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
@@ -34,15 +44,17 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
-  const [signIn, { data: credentails }] = useMutation<SignInOutput>(SIGN_IN);
+  const [
+    signIn,
+    { data: authData, error: authError, loading: loadings },
+  ] = useMutation<SignInOutput>(SIGN_IN);
   const { register, handleSubmit, errors } = useForm();
   const [isError, setIsError] = useState(false);
   const onSubmit = () => {
     signIn({ variables: { input: { username, password } } })
-      .then((result) => {
-        console.log(result);
-      })
+      .then((result) => {})
       .catch((error) => {
+        console.log(authError);
         setIsError(true);
       });
   };
@@ -62,7 +74,7 @@ const LoginForm = () => {
           <Box p={10}>
             <Box my={8} textAlign="left">
               <Text
-                fontSize="2xl"
+                fontSize="1xl"
                 fontWeight="bold"
                 color="#4A5568"
                 alignItems="center"
@@ -71,16 +83,39 @@ const LoginForm = () => {
                 {data.getServiceStatus.serviceName}
               </Text>
               <form>
-                {isError ? (
+                {!authData && !loadings && authError ? (
                   <>
-                    <Box my={2}>
-                      <Alert status="error">
-                        <AlertIcon />
-                        <AlertTitle mr={2}>เข้าสู่ระบบล้มเหลว</AlertTitle>
-                      </Alert>
-                    </Box>
+                    <Alert status="error" variant="left-accent" my={8}>
+                      <AlertIcon />
+                      <Box flex="1">
+                        <AlertTitle>เข้าสู่ระบบล้มเหลว</AlertTitle>
+                        <AlertDescription display="block">
+                          {authError.message.replace("GraphQL error:", "")}
+                        </AlertDescription>
+                      </Box>
+                      <CloseButton position="absolute" right="8px" top="8px" />
+                    </Alert>
                   </>
-                ) : null}
+                ) : (
+                  <></>
+                )}
+
+                {authData && !loadings && !authError ? (
+                  <>
+                    <Alert status="success" variant="left-accent" my={8}>
+                      <AlertIcon />
+                      <Box flex="1">
+                        <AlertTitle>เข้าสู่ระบบสำเร็จแล้ว</AlertTitle>
+                        <AlertDescription display="block">
+                          ระบบ กำลังพาท่านไปยังหน้าจัดการเอกสาร....
+                        </AlertDescription>
+                      </Box>
+                      <CloseButton position="absolute" right="8px" top="8px" />
+                    </Alert>
+                  </>
+                ) : (
+                  <></>
+                )}
                 <FormControl isRequired>
                   <FormLabel>ชื่อผู้ใช้ </FormLabel>
                   <Input
