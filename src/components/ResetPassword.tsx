@@ -20,7 +20,7 @@ const VARIANT_COLOR: string = "blue";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
-const ForgotPasswordForm = () => {
+const ResetPassword = () => {
   
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
   return (
@@ -43,11 +43,15 @@ const ForgotPasswordForm = () => {
                 alignItems="center"
                 marginBottom={10}
               >
-              เปลี่ยนเป็นข้อมูลเกี่ยวกับการขอรีเซ็ทรหัสผ่าน
+              ทำการสร้ารหัสผ่านใหม่
               </Text>
               <form>
                 <FormControl isRequired>
-                  <FormLabel>ชื่อผู้ใช้ หรือ Email </FormLabel>
+                  <FormLabel>รหัสผ่านใหม่ </FormLabel>
+                  <Input type="text" placeholder="กรอกชื่อผู้ใช้งาน / Email" />
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel>ยืนยันรหัสผ่านใหม่ </FormLabel>
                   <Input type="text" placeholder="กรอกชื่อผู้ใช้งาน / Email" />
                 </FormControl>
 
@@ -61,13 +65,8 @@ const ForgotPasswordForm = () => {
                   colorScheme="blue"
                   type="submit"
                 >
-                  รีเซตรหัสผ่าน
+                  ยืนยัน
                 </Button>
-                <Box>
-                    <Link color={`${VARIANT_COLOR}.500`} href="/" passHref>
-                      กลับไปเพจก่อนหน้า
-                    </Link>
-                  </Box>
 
               </form>
             </Box>
@@ -77,4 +76,4 @@ const ForgotPasswordForm = () => {
   );
 };
 
-export default ForgotPasswordForm;
+export default ResetPassword;
