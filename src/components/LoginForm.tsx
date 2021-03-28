@@ -83,7 +83,7 @@ const LoginForm = () => {
                 {data.getServiceStatus.serviceName}
               </Text>
               <form>
-                {/* {!authData && !loadings && authError ? (
+                {!authData && !loadings && authError ? (
                   <>
                     <Alert status="error" variant="left-accent" my={8}>
                       <AlertIcon />
@@ -115,7 +115,7 @@ const LoginForm = () => {
                   </>
                 ) : (
                   <></>
-                )} */}
+                )}
                 <FormControl isRequired>
                   <FormLabel>ชื่อผู้ใช้ </FormLabel>
                   <Input
