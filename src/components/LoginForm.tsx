@@ -139,7 +139,7 @@ const LoginForm = () => {
                     <Checkbox colorScheme="orange">จดจำการเข้าสู่ระบบ</Checkbox>
                   </Box>
                   <Box>
-                    <Link color={`${VARIANT_COLOR}.500`} href="login">
+                    <Link color={`${VARIANT_COLOR}.500`} href="/forgotPassword">
                       ลืมรหัสผ่าน?
                     </Link>
                   </Box>
