@@ -16,7 +16,7 @@ import {
 import { useState } from "react";
 import { useQuery } from "react-apollo";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
-const VARIANT_COLOR: string = "blue";
+const VARIANT_COLOR: string = "facebook";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };

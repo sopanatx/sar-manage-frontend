@@ -35,7 +35,7 @@ interface AuthResponse {
   loading: boolean;
 }
 
-const VARIANT_COLOR: string = "blue";
+const VARIANT_COLOR: string = "facebook";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
