@@ -35,7 +35,7 @@ interface AuthResponse {
   loading: boolean;
 }
 
-const VARIANT_COLOR: string = "orange";
+const VARIANT_COLOR: string = "blue";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
@@ -72,7 +72,7 @@ const LoginForm = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Box p={10}>
-            <Box my={8} textAlign="left">
+            <Box my={8} textAlign="center">
               <Text
                 fontSize="1xl"
                 fontWeight="bold"
@@ -151,6 +151,7 @@ const LoginForm = () => {
                   mt={4}
                   colorScheme={VARIANT_COLOR}
                   type="submit"
+                  variant="solid"
                 >
                   เข้าสู่ระบบ
                 </Button>
