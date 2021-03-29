@@ -48,14 +48,15 @@ const ForgotPasswordForm = () => {
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
       <Box
-        borderWidth={1}
+        //borderWidth={1}
         px={5}
         width="full"
         maxWidth="500px"
         borderRadius={4}
         textAlign="center"
-        boxShadow="lg"
+        //   boxShadow="lg"
         onSubmit={handleSubmit(onSubmit)}
+        bg="white"
       >
         <Box p={10}>
           <Box my={8} textAlign="center">
