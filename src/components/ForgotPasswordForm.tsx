@@ -92,7 +92,7 @@ const ForgotPasswordForm = () => {
                   <Box flex="1">
                     <AlertTitle>ดำเนินการสำเร็จ</AlertTitle>
                     <AlertDescription display="block">
-                      {data.requestPasswordReset.statusMessage}
+                      {data.statusMessage}
                     </AlertDescription>
                   </Box>
                   <CloseButton position="absolute" right="8px" top="8px" />
