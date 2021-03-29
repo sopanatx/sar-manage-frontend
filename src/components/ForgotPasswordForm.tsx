@@ -21,6 +21,7 @@ import {
   InputLeftElement,
   Icon,
   InputGroup,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-apollo";
@@ -31,12 +32,14 @@ import REQUEST_PASSWORD_RESET, {
 } from "../mutation/requestPasswordReset";
 import { useForm } from "react-hook-form";
 import { FaRegEnvelope, FaLock } from "react-icons/fa";
-
+import { useRouter } from "next/router";
 const VARIANT_COLOR: string = "facebook";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
 };
 const ForgotPasswordForm = () => {
+  const toast = useToast();
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const { register, handleSubmit, errors } = useForm();
   const [
@@ -45,9 +48,26 @@ const ForgotPasswordForm = () => {
   ] = useMutation<PasswordResetOutput>(REQUEST_PASSWORD_RESET);
   const onSubmit = () => {
     requestPasswordReset({ variables: { input: { username } } })
-      .then((result) => {})
+      .then((result) => {
+        toast({
+          title: `เข้าสู่ระบบสำเร็จ`,
+          status: "success",
+          description: `โปรดตรวจสอบอีเมลของท่านเพื่อทำการรีเซ็ทรหัสผ่าน`,
+          isClosable: true,
+          position: "top-right",
+          duration: 4000,
+        });
+        router.push("/");
+      })
       .catch((error) => {
-        console.log(error);
+        toast({
+          title: `ไม่สามารถเข้าสู่ระบบได้`,
+          status: "error",
+          description: `${error.message.replace("GraphQL error:", "")}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 1000,
+        });
       });
   };
   return (
@@ -75,38 +95,6 @@ const ForgotPasswordForm = () => {
               กู้คืนรหัสผ่าน
             </Text>
 
-            {!data && !loading && error ? (
-              <>
-                <Alert status="error" variant="left-accent" my={8}>
-                  <AlertIcon />
-                  <Box flex="1">
-                    <AlertTitle>ไม่สามารถดำเนินการได้</AlertTitle>
-                    <AlertDescription display="block">
-                      {error.message.replace("GraphQL error:", "")}
-                    </AlertDescription>
-                  </Box>
-                  <CloseButton position="absolute" right="8px" top="8px" />
-                </Alert>
-              </>
-            ) : (
-              <></>
-            )}
-            {data && !loading && !error ? (
-              <>
-                <Alert status="success" variant="left-accent" my={8}>
-                  <AlertIcon />
-                  <Box flex="1">
-                    <AlertTitle>ดำเนินการสำเร็จ</AlertTitle>
-                    <AlertDescription display="block">
-                      {data.statusMessage}
-                    </AlertDescription>
-                  </Box>
-                  <CloseButton position="absolute" right="8px" top="8px" />
-                </Alert>
-              </>
-            ) : (
-              <></>
-            )}
             <form>
               <FormControl isRequired>
                 <FormLabel>กรอกชื่อผู้ใช้</FormLabel>

@@ -84,7 +84,7 @@ const LoginForm = () => {
           description: `${error.message.replace("GraphQL error:", "")}`,
           isClosable: true,
           position: "top-right",
-          duration: 4000,
+          duration: 1000,
         });
       });
   };
