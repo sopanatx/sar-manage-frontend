@@ -17,6 +17,9 @@ import {
   AlertDescription,
   Spacer,
   CloseButton,
+  InputLeftElement,
+  Icon,
+  InputGroup,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-apollo";
@@ -30,6 +33,7 @@ import { useForm } from "react-hook-form";
 import React from "react";
 import Footer from "./layout/Footer";
 import changePreview from "../pages/index";
+import { FaRegEnvelope, FaLock } from "react-icons/fa";
 interface AuthResponse {
   data: string;
   error: string;
@@ -122,20 +126,41 @@ const LoginForm = () => {
                 )}
                 <FormControl isRequired>
                   <FormLabel>ชื่อผู้ใช้ </FormLabel>
-                  <Input
-                    type="text"
-                    placeholder="กรอกชื่อผู้ใช้งาน"
-                    onChange={(event) => setUsername(event.currentTarget.value)}
-                  />
+                  <InputGroup>
+                    <InputLeftElement
+                      children={
+                        <Icon
+                          as={FaRegEnvelope}
+                          color="secondary.inputHelper"
+                        />
+                      }
+                    />
+                    <Input
+                      type="text"
+                      placeholder="กรอกชื่อผู้ใช้งาน"
+                      onChange={(event) =>
+                        setUsername(event.currentTarget.value)
+                      }
+                    />
+                  </InputGroup>
                 </FormControl>
 
                 <FormControl mt={4} isRequired>
                   <FormLabel>รหัสผ่าน</FormLabel>
-                  <Input
-                    type="password"
-                    placeholder="กรอกรหัสผ่าน"
-                    onChange={(event) => setPassword(event.currentTarget.value)}
-                  />
+                  <InputGroup>
+                    <InputLeftElement
+                      children={
+                        <Icon as={FaLock} color="secondary.inputHelper" />
+                      }
+                    />
+                    <Input
+                      type="password"
+                      placeholder="กรอกรหัสผ่าน"
+                      onChange={(event) =>
+                        setPassword(event.currentTarget.value)
+                      }
+                    />
+                  </InputGroup>
                 </FormControl>
 
                 <Stack isInline justifyContent="space-between" mt={4}>
