@@ -82,7 +82,7 @@ const LoginForm = () => {
           <Box p={10}>
             <Box my={8} textAlign="center">
               <Text
-                fontSize="1xl"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#4A5568"
                 alignItems="center"
