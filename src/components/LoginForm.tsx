@@ -34,6 +34,7 @@ import React from "react";
 import Footer from "./layout/Footer";
 import changePreview from "../pages/index";
 import { FaRegEnvelope, FaLock } from "react-icons/fa";
+import { useRouter } from "next/router";
 interface AuthResponse {
   data: string;
   error: string;
@@ -46,6 +47,7 @@ const testlalert = () => {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
@@ -58,7 +60,9 @@ const LoginForm = () => {
 
   const onSubmit = () => {
     signIn({ variables: { input: { username, password } } })
-      .then((result) => {})
+      .then((result) => {
+        router.push("/dashboard");
+      })
       .catch((error) => {
         console.log(authError);
         setIsError(true);
