@@ -71,7 +71,7 @@ const LoginForm = () => {
           description: `ระบบกำลังพาท่านไปยังหน้าจัดการเอกสาร...`,
           isClosable: true,
           position: "top-right",
-          duration: 4000,
+          duration: 3000,
         });
         router.push("/dashboard");
       })
