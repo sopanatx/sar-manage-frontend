@@ -33,6 +33,8 @@ import REQUEST_PASSWORD_RESET, {
 import { useForm } from "react-hook-form";
 import { FaRegEnvelope, FaLock } from "react-icons/fa";
 import { useRouter } from "next/router";
+import Reaptcha from "reaptcha";
+
 const VARIANT_COLOR: string = "facebook";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
@@ -41,6 +43,7 @@ const ForgotPasswordForm = () => {
   const toast = useToast();
   const router = useRouter();
   const [username, setUsername] = useState("");
+  const [verify, setVerify] = useState(false);
   const { register, handleSubmit, errors } = useForm();
   const [
     requestPasswordReset,
@@ -113,6 +116,12 @@ const ForgotPasswordForm = () => {
                 </InputGroup>
               </FormControl>
 
+              <Box mt={4} align="center">
+                <Reaptcha
+                  sitekey="6LcApJIaAAAAALZZaB-lVhqiRBJ6ObWvnZm5QS-C"
+                  onVerify={() => setVerify(true)}
+                />
+              </Box>
               <Stack isInline justifyContent="space-between" mt={4}></Stack>
 
               <Button
@@ -121,6 +130,7 @@ const ForgotPasswordForm = () => {
                 mt={4}
                 colorScheme={VARIANT_COLOR}
                 type="submit"
+                isDisabled={!verify}
               >
                 กู้คืนรหัสผ่าน
               </Button>

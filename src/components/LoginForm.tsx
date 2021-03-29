@@ -36,6 +36,7 @@ import Footer from "./layout/Footer";
 import changePreview from "../pages/index";
 import { FaRegEnvelope, FaLock } from "react-icons/fa";
 import { useRouter } from "next/router";
+import Reaptcha from "reaptcha";
 interface AuthResponse {
   data: string;
   error: string;
@@ -53,7 +54,10 @@ const LoginForm = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [verify, setVerify] = useState(false);
+
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
+
   const [
     signIn,
     { data: authData, error: authError, loading: loadings },
@@ -154,9 +158,18 @@ const LoginForm = () => {
                   </InputGroup>
                 </FormControl>
 
+                <Box mt={4} align="center">
+                  <Reaptcha
+                    sitekey="6LcApJIaAAAAALZZaB-lVhqiRBJ6ObWvnZm5QS-C"
+                    onVerify={() => setVerify(true)}
+                  />
+                </Box>
+
                 <Stack isInline justifyContent="space-between" mt={4}>
                   <Box>
-                    <Checkbox colorScheme="orange">จดจำการเข้าสู่ระบบ</Checkbox>
+                    <Checkbox colorScheme={VARIANT_COLOR}>
+                      จดจำการเข้าสู่ระบบ
+                    </Checkbox>
                   </Box>
                   <Box>
                     <Link color={`${VARIANT_COLOR}.500`} href="/forgotPassword">
@@ -172,6 +185,7 @@ const LoginForm = () => {
                   colorScheme={VARIANT_COLOR}
                   type="submit"
                   variant="solid"
+                  isDisabled={!verify}
                 >
                   เข้าสู่ระบบ
                 </Button>

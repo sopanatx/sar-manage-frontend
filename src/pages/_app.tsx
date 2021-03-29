@@ -8,6 +8,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import Reaptcha from "reaptcha";
 const client = new ApolloClient({
   uri: "https://gateway.itpsru.in.th/graphql",
 });
