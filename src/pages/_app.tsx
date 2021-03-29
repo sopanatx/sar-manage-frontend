@@ -6,8 +6,20 @@ import customTheme from "../styles/customTheme";
 import "../styles/globals.css";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 const client = new ApolloClient({
   uri: "https://gateway.itpsru.in.th/graphql",
+});
+Sentry.init({
+  dsn:
+    "https://39b9424745644e8ea9ccb639686000d3@o449610.ingest.sentry.io/5696322",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
 });
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

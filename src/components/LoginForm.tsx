@@ -28,7 +28,8 @@ import SIGN_IN, {
 } from "../queries/signIn";
 import { useForm } from "react-hook-form";
 import React from "react";
-
+import Footer from "./layout/Footer";
+import changePreview from "../pages/index";
 interface AuthResponse {
   data: string;
   error: string;
@@ -50,6 +51,7 @@ const LoginForm = () => {
   ] = useMutation<SignInOutput>(SIGN_IN);
   const { register, handleSubmit, errors } = useForm();
   const [isError, setIsError] = useState(false);
+
   const onSubmit = () => {
     signIn({ variables: { input: { username, password } } })
       .then((result) => {})
@@ -62,14 +64,16 @@ const LoginForm = () => {
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
       {!loading && !error && data ? (
         <Box
-          borderWidth={1}
+          // borderWidth={1}
+          //      boxShadow="lg"
           px={5}
           width="full"
           maxWidth="600px"
-          borderRadius={4}
+          borderRadius={9}
           textAlign="center"
-          boxShadow="lg"
           onSubmit={handleSubmit(onSubmit)}
+          bg="white"
+          p={5}
         >
           <Box p={10}>
             <Box my={8} textAlign="center">
@@ -170,6 +174,7 @@ const LoginForm = () => {
             textAlign="center"
             boxShadow="lg"
             onSubmit={handleSubmit(onSubmit)}
+            bg="white"
           >
             <Box p={10}>
               <Box my={8} textAlign="center">

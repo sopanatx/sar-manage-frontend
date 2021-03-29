@@ -16,6 +16,8 @@
     "@emotion/is-prop-valid": "^1.1.0",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@sentry/react": "^6.2.3",
+    "@sentry/tracing": "^6.2.3",
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",

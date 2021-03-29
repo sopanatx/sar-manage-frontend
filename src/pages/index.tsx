@@ -19,7 +19,11 @@ import Footer from "../components/layout/Footer";
 const VARIANT_COLOR = "blue";
 
 const Home = () => {
-  return <LoginForm />;
+  return (
+    <Box bg="blue.100">
+      <LoginForm />
+    </Box>
+  );
 };
 
 export default Home;
