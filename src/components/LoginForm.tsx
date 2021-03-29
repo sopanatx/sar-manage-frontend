@@ -20,6 +20,7 @@ import {
   InputLeftElement,
   Icon,
   InputGroup,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-apollo";
@@ -48,6 +49,8 @@ const testlalert = () => {
 
 const LoginForm = () => {
   const router = useRouter();
+  const toast = useToast();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
@@ -66,6 +69,13 @@ const LoginForm = () => {
       .catch((error) => {
         console.log(authError);
         setIsError(true);
+        toast({
+          title: `ไม่สามารถเข้าสู่ระบบได้`,
+          status: "error",
+          description: `${authError.message.replace("GraphQL error:", "")}`,
+          isClosable: true,
+          position: "top-right",
+        });
       });
   };
   return (
@@ -95,23 +105,6 @@ const LoginForm = () => {
                 {data.getServiceStatus.serviceName}
               </Text>
               <form>
-                {!authData && !loadings && authError ? (
-                  <>
-                    <Alert status="error" variant="left-accent" my={8}>
-                      <AlertIcon />
-                      <Box flex="1">
-                        <AlertTitle>เข้าสู่ระบบล้มเหลว</AlertTitle>
-                        <AlertDescription display="block">
-                          {authError.message.replace("GraphQL error:", "")}
-                        </AlertDescription>
-                      </Box>
-                      <CloseButton position="absolute" right="8px" top="8px" />
-                    </Alert>
-                  </>
-                ) : (
-                  <></>
-                )}
-
                 {authData && !loadings && !authError ? (
                   <>
                     <Alert status="success" variant="left-accent" my={8}>
