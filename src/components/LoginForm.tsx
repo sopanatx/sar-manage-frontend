@@ -61,7 +61,7 @@ const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm();
   const [isError, setIsError] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     // e.preventDefault();
     signIn({ variables: { input: { username, password } } })
       .then((result) => {
