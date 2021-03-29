@@ -61,9 +61,18 @@ const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm();
   const [isError, setIsError] = useState(false);
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    // e.preventDefault();
     signIn({ variables: { input: { username, password } } })
       .then((result) => {
+        toast({
+          title: `เข้าสู่ระบบสำเร็จ`,
+          status: "success",
+          description: `ระบบกำลังพาท่านไปยังหน้าจัดการเอกสาร...`,
+          isClosable: true,
+          position: "top-right",
+          duration: 4000,
+        });
         router.push("/dashboard");
       })
       .catch((error) => {
@@ -75,6 +84,7 @@ const LoginForm = () => {
           description: `${error.message.replace("GraphQL error:", "")}`,
           isClosable: true,
           position: "top-right",
+          duration: 4000,
         });
       });
   };
@@ -105,22 +115,6 @@ const LoginForm = () => {
                 {data.getServiceStatus.serviceName}
               </Text>
               <form>
-                {authData && !loadings && !authError ? (
-                  <>
-                    <Alert status="success" variant="left-accent" my={8}>
-                      <AlertIcon />
-                      <Box flex="1">
-                        <AlertTitle>เข้าสู่ระบบสำเร็จแล้ว</AlertTitle>
-                        <AlertDescription display="block">
-                          ระบบ กำลังพาท่านไปยังหน้าจัดการเอกสาร....
-                        </AlertDescription>
-                      </Box>
-                      <CloseButton position="absolute" right="8px" top="8px" />
-                    </Alert>
-                  </>
-                ) : (
-                  <></>
-                )}
                 <FormControl isRequired>
                   <FormLabel>ชื่อผู้ใช้ </FormLabel>
                   <InputGroup>
