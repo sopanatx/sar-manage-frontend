@@ -7,4 +7,14 @@ module.exports = withPWA({
     register: true,
     sw: "/sw.js",
   },
+  async rewrites() {
+    return [
+      {
+        source: "/login",
+        destination: "/",
+      },
+    ];
+  },
+  compress: true,
+  poweredByHeader: false,
 });
