@@ -61,7 +61,7 @@ const ForgotPasswordForm = () => {
       })
       .catch((error) => {
         toast({
-          title: `ไม่สามารถเข้าสู่ระบบได้`,
+          title: `ไม่สามารถดำเนินการได้`,
           status: "error",
           description: `${error.message.replace("GraphQL error:", "")}`,
           isClosable: true,
