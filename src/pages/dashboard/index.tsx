@@ -1,15 +1,11 @@
 import {
   Box,
   Stack,
-  FormControl,
-  FormLabel,
-  Input,
   Button,
-  Checkbox,
-  Link,
   Flex,
   Text,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import { useQuery } from "react-apollo";
 import GET_SEMESTER from "../../queries/getSemester";
@@ -50,7 +46,9 @@ const Dashboard = () => {
               </>
             ) : (
               <>
-                <Text> Loading ... </Text>
+                <Stack align="center" py={8}>
+                  <Spinner color="blue.500" />
+                </Stack>
               </>
             )}
           </Box>
