@@ -50,7 +50,7 @@ const ForgotPasswordForm = () => {
     requestPasswordReset({ variables: { input: { username } } })
       .then((result) => {
         toast({
-          title: `เข้าสู่ระบบสำเร็จ`,
+          title: `ดำเนินการสำเร็จ`,
           status: "success",
           description: `โปรดตรวจสอบอีเมลของท่านเพื่อทำการรีเซ็ทรหัสผ่าน`,
           isClosable: true,
