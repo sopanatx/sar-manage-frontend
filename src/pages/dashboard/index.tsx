@@ -32,7 +32,7 @@ const Dashboard = () => {
           maxWidth="600px"
           borderRadius={4}
           textAlign="center"
-          boxShadow="lg"
+          // boxShadow="lg"
           bg="white"
         >
           <Box>
@@ -43,7 +43,7 @@ const Dashboard = () => {
             {!loading && !error && data ? (
               <>
                 <Select size="md" my="8px" mx="8px">
-                  {data.getSemester.map((item, index) => (
+                  {data.getSemester.map((item: any, index: any) => (
                     <option value={item.id}>{item.semesterName}</option>
                   ))}
                 </Select>
