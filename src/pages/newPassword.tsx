@@ -17,7 +17,7 @@ import CTASection from "../components/CTASection";
 import LoginForm from "../components/LoginForm";
 import Footer from "../components/layout/Footer";
 import ForgotPasswordForm from "../components/ForgotPasswordForm";
-import ResetPassword from '../components/ResetPassword'
+import ResetPassword from "../components/ResetPassword";
 const VARIANT_COLOR = "blue";
 
 const NewPassword = () => {

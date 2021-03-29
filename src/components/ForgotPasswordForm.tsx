@@ -18,6 +18,9 @@ import {
   AlertDescription,
   Spacer,
   CloseButton,
+  InputLeftElement,
+  Icon,
+  InputGroup,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-apollo";
@@ -27,6 +30,8 @@ import REQUEST_PASSWORD_RESET, {
   PasswordResetOutput,
 } from "../mutation/requestPasswordReset";
 import { useForm } from "react-hook-form";
+import { FaRegEnvelope, FaLock } from "react-icons/fa";
+
 const VARIANT_COLOR: string = "facebook";
 const testlalert = () => {
   alert(`หวัดดีค้าบ`);
@@ -105,11 +110,19 @@ const ForgotPasswordForm = () => {
             <form>
               <FormControl isRequired>
                 <FormLabel>กรอกชื่อผู้ใช้</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="กรอกชื่อผู้ใช้งาน"
-                  onChange={(event) => setUsername(event.currentTarget.value)}
-                />
+
+                <InputGroup>
+                  <InputLeftElement
+                    children={
+                      <Icon as={FaRegEnvelope} color="secondary.inputHelper" />
+                    }
+                  />
+                  <Input
+                    type="text"
+                    placeholder="กรอกชื่อผู้ใช้งาน"
+                    onChange={(event) => setUsername(event.currentTarget.value)}
+                  />
+                </InputGroup>
               </FormControl>
 
               <Stack isInline justifyContent="space-between" mt={4}></Stack>
