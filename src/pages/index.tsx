@@ -16,6 +16,7 @@ import SomeImage from "../components/SomeImage";
 import CTASection from "../components/CTASection";
 import LoginForm from "../components/LoginForm";
 import Footer from "../components/layout/Footer";
+
 const VARIANT_COLOR = "blue";
 
 const Home = () => {

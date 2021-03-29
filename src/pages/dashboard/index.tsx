@@ -11,10 +11,12 @@ import {
   Text,
   Select,
 } from "@chakra-ui/react";
-
+import { useQuery } from "react-apollo";
+import GET_SEMESTER from "../../queries/getSemester";
 const VARIANT_COLOR = "blue";
 
 const Dashboard = () => {
+  const { data, error, loading } = useQuery(GET_SEMESTER);
   return (
     <Box bg="blue.100">
       <Flex
@@ -37,11 +39,20 @@ const Dashboard = () => {
             <Text fontSize="2xl" fontWeight="bold">
               โปรดเลือกปีการศึกษา
             </Text>
-            <Select size="md" my="8px" mx="8px">
-              <option value="option1">ปีการศึกษา 2561</option>
-              <option value="option2">ปีการศึกษา 2562</option>
-              <option value="option3">ปีการศึกษา 2563</option>
-            </Select>
+
+            {!loading && !error && data ? (
+              <>
+                <Select size="md" my="8px" mx="8px">
+                  {data.getSemester.map((item, index) => (
+                    <option value={item.id}>{item.semesterName}</option>
+                  ))}
+                </Select>
+              </>
+            ) : (
+              <>
+                <Text> Loading ... </Text>
+              </>
+            )}
           </Box>
           <Button colorScheme="blue" variant="outline">
             ยืนยัน
