@@ -72,7 +72,7 @@ const LoginForm = () => {
         toast({
           title: `ไม่สามารถเข้าสู่ระบบได้`,
           status: "error",
-          description: `${authError.message.replace("GraphQL error:", "")}`,
+          description: `${error.message.replace("GraphQL error:", "")}`,
           isClosable: true,
           position: "top-right",
         });
