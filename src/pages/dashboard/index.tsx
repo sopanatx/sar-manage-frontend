@@ -14,6 +14,8 @@ import SemesterSelect from "../../components/SemesterSelect";
 
 const VARIANT_COLOR = "blue";
 
+//const componetsState = <Header />;
+
 const Dashboard = () => {
   const { data, error, loading } = useQuery(GET_SEMESTER);
   return (

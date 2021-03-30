@@ -65,6 +65,10 @@ const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm();
   const [isError, setIsError] = useState(false);
 
+  const changeRoute = (name: string) => {
+    router.push(`${name}`);
+  };
+
   const onSubmit = () => {
     // e.preventDefault();
     signIn({ variables: { input: { username, password } } })
@@ -172,7 +176,10 @@ const LoginForm = () => {
                     </Checkbox>
                   </Box>
                   <Box>
-                    <Link color={`${VARIANT_COLOR}.500`} href="/forgotPassword">
+                    <Link
+                      color={`${VARIANT_COLOR}.500`}
+                      onClick={() => changeRoute("/forgotPassword")}
+                    >
                       ลืมรหัสผ่าน?
                     </Link>
                   </Box>

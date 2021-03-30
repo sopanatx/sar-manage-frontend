@@ -65,6 +65,10 @@ const ForgotPasswordForm = () => {
         });
       });
   };
+  const changeRoute = (name: string) => {
+    router.push(`${name}`);
+  };
+
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
       <Box
@@ -132,7 +136,10 @@ const ForgotPasswordForm = () => {
 
               <Box my={8} textAlign="center">
                 <Divider marginBottom="2rem" />
-                <Link color={`${VARIANT_COLOR}.500`} href="/">
+                <Link
+                  color={`${VARIANT_COLOR}.500`}
+                  onClick={() => changeRoute("/")}
+                >
                   กลับไปเพจก่อนหน้า
                 </Link>
               </Box>
