@@ -51,9 +51,7 @@ const SemesterSelect = () => {
               </>
             )}
           </Box>
-          <Button colorScheme="blue" variant="outline">
-            ยืนยัน
-          </Button>
+          <Button colorScheme="blue">ยืนยัน</Button>
         </Box>
       </Flex>
     </Box>
