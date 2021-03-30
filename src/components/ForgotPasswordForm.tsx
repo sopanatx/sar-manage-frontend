@@ -5,23 +5,15 @@ import {
   FormLabel,
   Input,
   Button,
-  Checkbox,
   Link,
   Flex,
   Text,
-  Spinner,
   Divider,
-  useColorMode,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Spacer,
-  CloseButton,
   InputLeftElement,
   Icon,
   InputGroup,
   useToast,
+  FormHelperText,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-apollo";
@@ -114,6 +106,9 @@ const ForgotPasswordForm = () => {
                     onChange={(event) => setUsername(event.currentTarget.value)}
                   />
                 </InputGroup>
+                <FormHelperText fontWeight="500">
+                  ระบบจะทำการจัดส่งข้อมูลการเปลี่ยนรหัสผ่านไปยังอีเมลที่ผูกกับบัญชีของท่าน
+                </FormHelperText>
               </FormControl>
 
               <Box mt={4} align="center">
@@ -134,7 +129,9 @@ const ForgotPasswordForm = () => {
               >
                 กู้คืนรหัสผ่าน
               </Button>
+
               <Box my={8} textAlign="center">
+                <Divider marginBottom="2rem" />
                 <Link color={`${VARIANT_COLOR}.500`} href="/">
                   กลับไปเพจก่อนหน้า
                 </Link>

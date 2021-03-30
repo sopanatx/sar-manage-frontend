@@ -9,12 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { useQuery } from "react-apollo";
 import GET_SEMESTER from "../../queries/getSemester";
+import Header from "../../components/layout/Header";
 const VARIANT_COLOR = "blue";
 
 const Dashboard = () => {
   const { data, error, loading } = useQuery(GET_SEMESTER);
   return (
     <Box bg="blue.100">
+      <Header />
       <Flex
         minHeight="100vh"
         width="full"
