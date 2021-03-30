@@ -17,4 +17,7 @@ module.exports = withPWA({
   },
   compress: true,
   poweredByHeader: false,
+  future: {
+    webpack5: true,
+  },
 });
