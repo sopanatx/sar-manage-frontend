@@ -23,6 +23,7 @@ const ForgotPassword = () => {
   return (
     <Box bg="blue.100">
       <ForgotPasswordForm />
+      <Footer />
     </Box>
   );
 };

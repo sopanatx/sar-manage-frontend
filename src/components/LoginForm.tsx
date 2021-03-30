@@ -196,20 +196,20 @@ const LoginForm = () => {
       ) : (
         <>
           <Box
-            borderWidth={1}
+            // borderWidth={1}
             px={5}
             width="full"
             maxWidth="600px"
             borderRadius={4}
             textAlign="center"
-            boxShadow="lg"
+            //boxShadow="lg"
             onSubmit={handleSubmit(onSubmit)}
             bg="white"
           >
             <Box p={10}>
               <Box my={8} textAlign="center">
                 <Text
-                  fontSize="1xl"
+                  fontSize="2xl"
                   fontWeight="bold"
                   color="#4A5568"
                   alignItems="center"

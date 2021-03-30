@@ -11,25 +11,23 @@ const Footer = () => {
       <Stack
         flexDirection={["column", "row"]}
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="center"
       >
         <Stack isInline fontWeight="500" fontSize="sm">
-          <Text color="secondary.link">&copy; 2020</Text>
-          <Link href="#" color="secondary.link" fontWeight="bold">
-            Awesome App
+          <Text color="secondary.link" fontFamily="Kanit">
+            &copy; 2021
+          </Text>
+          <Link
+            href="https://pleum.in.th"
+            color="secondary.link"
+            fontWeight="600"
+            fontFamily="Kanit"
+          >
+            PLEUM STUDIO SOFTWARE DEVELOPMENT
           </Link>
-          <Text color="secondary.link">&mdash; All rights reserved</Text>
-        </Stack>
-        <Stack isInline fontWeight="500" fontSize="sm">
-          <Link className="footer-nav-item" href="#" color="secondary.link">
-            Terms
-          </Link>
-          <Link className="footer-nav-item" href="#" color="secondary.link">
-            Privacy Policy
-          </Link>
-          <Link className="footer-nav-item" href="#" color="secondary.link">
-            Contact Us
-          </Link>
+          <Text color="secondary.link" fontFamily="Kanit">
+            &mdash; All rights reserved.
+          </Text>
         </Stack>
       </Stack>
     </Container>

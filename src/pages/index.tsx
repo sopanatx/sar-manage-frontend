@@ -23,6 +23,7 @@ const Home = () => {
   return (
     <Box bg="blue.100">
       <LoginForm />
+      <Footer />
     </Box>
   );
 };
