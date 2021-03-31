@@ -59,7 +59,7 @@ export default function WithSubnavigation() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            Logo
+            SAR MANAGEMENT
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
