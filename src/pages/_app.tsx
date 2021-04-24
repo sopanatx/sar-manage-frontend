@@ -30,7 +30,7 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-
+console.log(await GIT_BUILD_ID());
 const httpLink = new HttpLink({ uri: GRAPHQL_API_ENDPOINT });
 
 const client = new ApolloClient({

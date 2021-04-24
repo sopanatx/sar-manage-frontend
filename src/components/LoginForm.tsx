@@ -79,10 +79,9 @@ const LoginForm = () => {
           position: "top-right",
           duration: 3000,
         });
-        //  router.push("/dashboard");
+        router.push("/dashboard");
       })
       .catch((error) => {
-        // console.log(authError);
         setIsError(true);
         toast({
           title: `ไม่สามารถเข้าสู่ระบบได้`,
