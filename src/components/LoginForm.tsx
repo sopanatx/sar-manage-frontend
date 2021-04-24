@@ -73,6 +73,8 @@ const LoginForm = () => {
     // e.preventDefault();
     signIn({ variables: { input: { username, password } } })
       .then((result) => {
+        console.log(result.data.signIn.accessToken);
+        localStorage.setItem("accessToken", result.data.signIn.accessToken);
         toast({
           title: `เข้าสู่ระบบสำเร็จ`,
           status: "success",

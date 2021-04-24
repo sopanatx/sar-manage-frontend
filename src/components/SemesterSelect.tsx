@@ -6,12 +6,22 @@ import {
   Text,
   Select,
   Spinner,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
+import router from "next/router";
+import { useState } from "react";
 import { useQuery } from "react-apollo";
 import GET_SEMESTER from "../queries/getSemester";
 const VARIANT_COLOR = "blue";
+function handleChange(event) {
+  console.log(event.targer.value);
+}
+
 const SemesterSelect = () => {
   const { data, error, loading } = useQuery(GET_SEMESTER);
+  const [semester, setSemester] = useState("");
+
   return (
     <Box bg="blue.100">
       <Flex
@@ -35,9 +45,24 @@ const SemesterSelect = () => {
               โปรดเลือกปีการศึกษา
             </Text>
 
+            <Alert status="info" variant="subtle" margin={2} borderRadius={9}>
+              <AlertIcon />
+              ระบบจะนำทางไปยังหน้าจัดการเอกสารเมื่อท่านได้เลือกปีการศึกษาแล้ว
+            </Alert>
+
             {!loading && !error && data ? (
               <>
-                <Select size="md" my="8px" mx="8px">
+                <Select
+                  size="md"
+                  my="8px"
+                  mx="8px"
+                  isRequired={true}
+                  onChange={(e) =>
+                    router.push(`/dashboard/semester/${e.target.value}`)
+                  }
+                  placeholder="เลือกปีการศึกษา"
+                  variant="filled"
+                >
                   {data.getSemester.map((item: any, index: any) => (
                     <option value={item.id}>{item.semesterName}</option>
                   ))}
@@ -51,7 +76,12 @@ const SemesterSelect = () => {
               </>
             )}
           </Box>
-          <Button colorScheme="blue">ยืนยัน</Button>
+          {/* <Button
+            colorScheme="blue"
+            onClick={() => router.push(`dashboard/semester/${semester}`)}
+          >
+            ยืนยัน
+          </Button> */}
         </Box>
       </Flex>
     </Box>

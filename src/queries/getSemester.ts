@@ -4,8 +4,6 @@ const getSemester = gql`
     getSemester {
       id
       semesterName
-      isAvaliable
-      createdAt
     }
   }
 `;

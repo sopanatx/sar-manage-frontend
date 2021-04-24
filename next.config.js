@@ -20,4 +20,8 @@ module.exports = withPWA({
   future: {
     webpack5: true,
   },
+  publicRuntimeConfig: {
+    GRAPHQL_API_ENDPOINT: process.env.GRAPHQL_API_ENDPOINT,
+    SENTRY_API_ENDPOINT: process.env.SENTRY_API_ENDPOINT,
+  },
 });

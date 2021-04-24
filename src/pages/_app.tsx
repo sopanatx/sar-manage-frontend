@@ -1,27 +1,50 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import Layout from "../components/layout";
+
 import customTheme from "../styles/customTheme";
 import "../styles/globals.css";
-import ApolloClient from "apollo-boost";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import { ApolloProvider } from "react-apollo";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import Reaptcha from "reaptcha";
-const client = new ApolloClient({
-  uri: "https://gateway.itpsru.in.th/graphql",
-});
-Sentry.init({
-  dsn:
-    "https://39b9424745644e8ea9ccb639686000d3@o449610.ingest.sentry.io/5696322",
-  integrations: [new Integrations.BrowserTracing()],
+import { setContext } from "@apollo/client/link/context";
+import getConfig from "next/config";
 
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
+const {
+  GRAPHQL_API_ENDPOINT,
+  SENTRY_API_ENDPOINT,
+} = getConfig().publicRuntimeConfig;
+const authLink = setContext((_, { headers }) => {
+  let token;
+  if (typeof window != "undefined") {
+    token = localStorage.getItem("accessToken");
+  }
+
+  return {
+    headers: {
+      ...headers,
+      "Access-Control-Allow-Origin": "*",
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  };
 });
+
+const httpLink = new HttpLink({ uri: GRAPHQL_API_ENDPOINT });
+
+const client = new ApolloClient({
+  ssrMode: typeof window === "undefined",
+  cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
+});
+if (process.env.ENV == "production") {
+  Sentry.init({
+    dsn: SENTRY_API_ENDPOINT,
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+  });
+}
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={client}>
@@ -43,3 +66,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 };
 
 export default MyApp;
+function localStorate(localStorate: any) {
+  throw new Error("Function not implemented.");
+}
