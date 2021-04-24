@@ -5,7 +5,8 @@ import Head from "next/head";
 import customTheme from "../styles/customTheme";
 import "../styles/globals.css";
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-import { ApolloProvider } from "react-apollo";
+
+import { ApolloProvider } from "@apollo/react-hooks";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { setContext } from "@apollo/client/link/context";
@@ -33,9 +34,8 @@ const authLink = setContext((_, { headers }) => {
 const httpLink = new HttpLink({ uri: GRAPHQL_API_ENDPOINT });
 
 const client = new ApolloClient({
-  ssrMode: typeof window === "undefined",
+  uri: GRAPHQL_API_ENDPOINT,
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink),
 });
 if (process.env.ENV == "production") {
   Sentry.init({
@@ -47,7 +47,7 @@ if (process.env.ENV == "production") {
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client as any}>
       <ChakraProvider theme={customTheme}>
         <Head>
           <meta

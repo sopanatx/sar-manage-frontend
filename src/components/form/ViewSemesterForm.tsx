@@ -17,7 +17,7 @@ import { useQuery } from "react-apollo";
 import { WarningIcon } from "@chakra-ui/icons";
 import { useMutation } from "@apollo/react-hooks";
 const VARIANT_COLOR = "blue";
-const ViewSemesterForm = ({ semester }) => {
+const ViewSemesterForm = ({ semester }: any) => {
   return (
     <Box bg="blue.100">
       <Flex

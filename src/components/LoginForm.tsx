@@ -32,8 +32,6 @@ import SIGN_IN, {
 } from "../queries/signIn";
 import { useForm } from "react-hook-form";
 import React from "react";
-import Footer from "./layout/Footer";
-import changePreview from "../pages/index";
 import { FaRegEnvelope, FaLock } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Reaptcha from "reaptcha";
@@ -58,10 +56,7 @@ const LoginForm = () => {
 
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
 
-  const [
-    signIn,
-    { data: authData, error: authError, loading: loadings },
-  ] = useMutation<SignInOutput>(SIGN_IN);
+  const [signIn, { data: credentials }] = useMutation(SIGN_IN);
   const { register, handleSubmit, errors } = useForm();
   const [isError, setIsError] = useState(false);
 
@@ -73,8 +68,9 @@ const LoginForm = () => {
     // e.preventDefault();
     signIn({ variables: { input: { username, password } } })
       .then((result) => {
-        console.log(result.data.signIn.accessToken);
-        localStorage.setItem("accessToken", result.data.signIn.accessToken);
+        const { signIn } = result["data"];
+        console.log(signIn.accessToken);
+        localStorage.setItem("accessToken", signIn.accessToken);
         toast({
           title: `เข้าสู่ระบบสำเร็จ`,
           status: "success",
@@ -83,10 +79,10 @@ const LoginForm = () => {
           position: "top-right",
           duration: 3000,
         });
-        router.push("/dashboard");
+        //  router.push("/dashboard");
       })
       .catch((error) => {
-        console.log(authError);
+        // console.log(authError);
         setIsError(true);
         toast({
           title: `ไม่สามารถเข้าสู่ระบบได้`,

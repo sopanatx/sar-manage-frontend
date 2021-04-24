@@ -14,9 +14,6 @@ import { useState } from "react";
 import { useQuery } from "react-apollo";
 import GET_SEMESTER from "../queries/getSemester";
 const VARIANT_COLOR = "blue";
-function handleChange(event) {
-  console.log(event.targer.value);
-}
 
 const SemesterSelect = () => {
   const { data, error, loading } = useQuery(GET_SEMESTER);
