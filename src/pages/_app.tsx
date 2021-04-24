@@ -35,6 +35,7 @@ const httpLink = new HttpLink({ uri: GRAPHQL_API_ENDPOINT });
 const client = new ApolloClient({
   uri: GRAPHQL_API_ENDPOINT,
   cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
 });
 if (process.env.ENV == "production") {
   Sentry.init({
