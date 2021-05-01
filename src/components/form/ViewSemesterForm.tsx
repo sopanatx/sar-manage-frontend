@@ -78,6 +78,7 @@ const ViewSemesterForm = ({ semester }: any) => {
                 </Text>
 
                 <Button
+                  colorScheme="blue"
                   margin={10}
                   px={5}
                   onClick={() => setIsShowingList(true)}
@@ -131,6 +132,7 @@ const ListCategories = () => {
     <Flex minHeight="30vh" width="full" align="center" justifyContent="center">
       {" "}
       <Box
+        margin={5}
         px={5}
         py={10}
         width="full"
@@ -156,7 +158,23 @@ const ListCategories = () => {
             </h2>
             <AccordionPanel pb={4}>ตัวบ่งชี้ 1.1</AccordionPanel>
           </AccordionItem>
+          <AccordionItem borderRadius={9}>
+            <h2>
+              <AccordionButton
+                _expanded={{ bg: "blue.600", color: "white", borderRadius: 5 }}
+              >
+                <Box flex="1" textAlign="left">
+                  องค์ประกอบ 2
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>-</AccordionPanel>
+          </AccordionItem>
         </Accordion>
+        <Button colorScheme="blue" margin={5}>
+          เพิ่มองค์ประกอบ
+        </Button>
       </Box>
     </Flex>
   );
