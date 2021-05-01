@@ -79,7 +79,7 @@ const LoginForm = () => {
           position: "top-right",
           duration: 3000,
         });
-        router.push("/dashboard");
+        router.replace("/dashboard");
       })
       .catch((error) => {
         setIsError(true);

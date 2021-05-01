@@ -29,12 +29,10 @@ const VARIANT_COLOR = "blue";
 
 const ViewSemesterForm = ({ semester }: any) => {
   const [isShowingList, setIsShowingList] = useState(false);
-
-  useEffect(() => {
-    const { data, error, loading } = useQuery(GET_CATEGORY_SEMESTER, {
-      variables: { input: { semester: semester } },
-    });
+  const { data, error, loading } = useQuery(GET_CATEGORY_SEMESTER, {
+    variables: { input: { semester: semester } },
   });
+  useEffect(() => {});
   return (
     <Box bg="blue.100">
       {isShowingList ? <ListCategories /> : ""}
