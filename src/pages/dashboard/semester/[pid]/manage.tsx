@@ -27,7 +27,19 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,
+  Link,
 } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import Header from "../../../../components/layout/Header";
 import GET_CATEGORY from "../../../../queries/getCategories";
@@ -82,7 +94,16 @@ const ManageDocument = () => {
                             <AccordionIcon />
                           </AccordionButton>
                         </h2>
-                        <AccordionPanel pb={4}></AccordionPanel>
+                        <AccordionPanel pb={4}>
+                          {item.SubCategory.map((item: any, index: number) => (
+                            <>
+                              <Link color="blue.500">
+                                {" "}
+                                {item.subCategoryName}
+                              </Link>{" "}
+                            </>
+                          ))}
+                        </AccordionPanel>
                       </AccordionItem>
                     </>
                   ))}
