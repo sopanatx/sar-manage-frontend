@@ -8,9 +8,18 @@ const searchFileBySemester = gql`
         index
       }
     }
-    getServiceStatus {
-      status
-    }
+    # getCategories {
+    #   id
+    #   categoryName
+    #   SubCategory {
+    #     id
+    #     subCategoryName
+    #     subCategoryDescription
+    #     isAvailable
+    #     createdAt
+    #     updatedAt
+    #   }
+    # }
   }
 `;
 

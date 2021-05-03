@@ -54,9 +54,7 @@ const SemesterSelect = () => {
                   my="8px"
                   mx="8px"
                   isRequired={true}
-                  onChange={(e) =>
-                    router.push(`/dashboard/semester/${e.target.value}`)
-                  }
+                  onChange={(e) => setSemester(e.target.value)}
                   placeholder="เลือกปีการศึกษา"
                   variant="filled"
                 >
@@ -73,12 +71,12 @@ const SemesterSelect = () => {
               </>
             )}
           </Box>
-          {/* <Button
+          <Button
             colorScheme="blue"
-            onClick={() => router.push(`dashboard/semester/${semester}`)}
+            onClick={() => router.push(`/dashboard/semester/${semester}`)}
           >
             ยืนยัน
-          </Button> */}
+          </Button>
         </Box>
       </Flex>
     </Box>
