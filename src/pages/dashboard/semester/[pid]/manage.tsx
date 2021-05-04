@@ -38,6 +38,9 @@ import {
   MenuCommand,
   MenuDivider,
   Link,
+  Grid,
+  GridItem,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -74,40 +77,56 @@ const ManageDocument = () => {
             </Heading>
             {!loading && !error && data ? (
               <>
-                <Accordion px={5} py={5}>
-                  {data.getCategories.map((item: any, index: number) => (
-                    <>
-                      <AccordionItem>
-                        <h2>
-                          <AccordionButton
-                            _expanded={{
-                              bg: "blue.800",
-                              color: "white",
-                              borderRadius: 5,
-                            }}
-                          >
-                            <Box flex="1" textAlign="left">
-                              <Text fontFamily="Kanit" fontSize={18}>
-                                {item.categoryName}
-                              </Text>
-                            </Box>
-                            <AccordionIcon />
-                          </AccordionButton>
-                        </h2>
-                        <AccordionPanel pb={4}>
+                <SimpleGrid columns={2} spacing={10}>
+                  <Accordion px={5} py={5}>
+                    {data.getCategories.map((item: any, index: number) => (
+                      <>
+                        <AccordionItem>
+                          <h2>
+                            <AccordionButton
+                              _expanded={{
+                                bg: "blue.800",
+                                color: "white",
+                                borderRadius: 5,
+                              }}
+                            >
+                              <Box flex="1" textAlign="left">
+                                <Text fontFamily="Kanit" fontSize={18}>
+                                  {item.categoryName}
+                                </Text>
+                              </Box>
+                              <AccordionIcon />
+                            </AccordionButton>
+                          </h2>
                           {item.SubCategory.map((item: any, index: number) => (
-                            <>
-                              <Link color="blue.500">
-                                {" "}
+                            <AccordionPanel pb={4}>
+                              <Link color="blue.500" as="span">
                                 {item.subCategoryName}
-                              </Link>{" "}
-                            </>
+                              </Link>
+                            </AccordionPanel>
                           ))}
-                        </AccordionPanel>
-                      </AccordionItem>
-                    </>
-                  ))}
-                </Accordion>
+                        </AccordionItem>
+                      </>
+                    ))}
+                  </Accordion>
+                  <Box
+                    marginTop={3}
+                    px={3}
+                    py={3}
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="hidden"
+                  >
+                    <Text
+                      fontSize="lg"
+                      fontWeight="bold"
+                      py={5}
+                      color="red.500"
+                    >
+                      กรุณาเลือกตัวบ่งชี้
+                    </Text>
+                  </Box>
+                </SimpleGrid>
               </>
             ) : (
               <></>
