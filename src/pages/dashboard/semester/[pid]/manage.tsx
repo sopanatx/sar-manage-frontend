@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -51,6 +52,7 @@ const ManageDocument = () => {
   const router = useRouter();
   const { pid } = router.query;
   const { data, error, loading } = useQuery(GET_CATEGORY);
+  const [isSelectedTopic, setIsSelectedTopic] = useState(false);
   return (
     <Box bg="blue.100">
       <Header />
@@ -72,8 +74,8 @@ const ManageDocument = () => {
             textAlign="center"
             bg="white"
           >
-            <Heading fontFamily="Kanit" color="gray.600">
-              หมวดหมู่
+            <Heading color="gray.600">
+              เลือกหัวข้อที่ต้องการเพิ่ม / แก้ไข
             </Heading>
             {!loading && !error && data ? (
               <>
@@ -117,14 +119,16 @@ const ManageDocument = () => {
                     borderRadius="lg"
                     overflow="hidden"
                   >
-                    <Text
-                      fontSize="lg"
-                      fontWeight="bold"
-                      py={5}
-                      color="red.500"
-                    >
-                      กรุณาเลือกตัวบ่งชี้
-                    </Text>
+                    {!isSelectedTopic ? (
+                      <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        py={5}
+                        color="red.500"
+                      >
+                        กรุณาเลือกตัวบ่งชี้
+                      </Text>
+                    ) : null}
                   </Box>
                 </SimpleGrid>
               </>
