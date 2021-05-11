@@ -161,7 +161,9 @@ const ManageDocument = () => {
                             <Select>
                               {res1.data.getTopicBySubCategories.map(
                                 (item: any, index: number) => (
-                                  <option>{item.topicName}</option>
+                                  <option>
+                                    {index}. {item.topicName}
+                                  </option>
                                 )
                               )}
                             </Select>
