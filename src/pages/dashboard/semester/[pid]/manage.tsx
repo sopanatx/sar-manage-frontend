@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/react-hooks";
-import { useState } from "react";
+import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import { useState, useRef } from "react";
 import {
   Box,
   Flex,
@@ -42,17 +42,40 @@ import {
   Grid,
   GridItem,
   SimpleGrid,
+  Select,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import Header from "../../../../components/layout/Header";
 import GET_CATEGORY from "../../../../queries/getCategories";
-
+import { gql } from "@apollo/client";
+import GET_TOPIC_DOCUMENT from "../../../../queries/getTopicDocument";
+import GET_SERVICE_STATUS from "../../../../queries/getServiceStatus";
 const ManageDocument = () => {
   const router = useRouter();
   const { pid } = router.query;
+  const variableRef = useRef({});
+
   const { data, error, loading } = useQuery(GET_CATEGORY);
+  const [shouldExecute, executeQuery] = useState(false);
+  const [stateSubCategory, setStateSubCategory] = useState();
+  const [loadTopic, res1] = useLazyQuery(GET_TOPIC_DOCUMENT, {
+    fetchPolicy: "network-only",
+  });
+  const handleClick = (SubCategory: string) => {
+    loadTopic({
+      variables: {
+        getTopicBySubCategoriesGetTopicBySubCategories: {
+          subCategoryId: SubCategory,
+        },
+      },
+    });
+    setIsSelectedTopic(true);
+    console.log(res1);
+  };
+
   const [isSelectedTopic, setIsSelectedTopic] = useState(false);
+
   return (
     <Box bg="blue.100">
       <Header />
@@ -102,7 +125,11 @@ const ManageDocument = () => {
                           </h2>
                           {item.SubCategory.map((item: any, index: number) => (
                             <AccordionPanel pb={4}>
-                              <Link color="blue.500" as="span">
+                              <Link
+                                color="blue.500"
+                                as="span"
+                                onClick={() => handleClick(item.id)}
+                              >
                                 {item.subCategoryName}
                               </Link>
                             </AccordionPanel>
@@ -119,21 +146,38 @@ const ManageDocument = () => {
                     borderRadius="lg"
                     overflow="hidden"
                   >
-                    {!isSelectedTopic ? (
-                      <Text
-                        fontSize="lg"
-                        fontWeight="bold"
-                        py={5}
-                        color="red.500"
-                      >
-                        กรุณาเลือกตัวบ่งชี้
-                      </Text>
-                    ) : null}
+                    {isSelectedTopic ? (
+                      <>
+                        <Text
+                          fontSize="lg"
+                          fontWeight="bold"
+                          py={5}
+                          color="red.500"
+                        >
+                          กรุณาเลือกตัวบ่งชี้
+                        </Text>
+                        {res1.data && !res1.loading ? (
+                          <>
+                            <Select>
+                              {res1.data.getTopicBySubCategories.map(
+                                (item: any, index: number) => (
+                                  <option>{item.topicName}</option>
+                                )
+                              )}
+                            </Select>
+                          </>
+                        ) : null}
+                      </>
+                    ) : (
+                      <Text>โปรดเลือกหัวข้อที่ต้องการจัดการเอกสาร</Text>
+                    )}
                   </Box>
                 </SimpleGrid>
               </>
             ) : (
-              <></>
+              <>
+                <Text margin={20}>กำลังโหลดข้อมูล</Text>
+              </>
             )}
           </Box>
         </Flex>
