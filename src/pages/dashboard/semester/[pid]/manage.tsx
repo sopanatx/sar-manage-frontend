@@ -154,7 +154,7 @@ const ManageDocument = () => {
                           py={5}
                           color="red.500"
                         >
-                          กรุณาเลือกตัวบ่งชี้
+                          กรุณาเลือกหัวข้อย่อ
                         </Text>
                         {res1.data && !res1.loading ? (
                           <>
@@ -171,7 +171,14 @@ const ManageDocument = () => {
                         ) : null}
                       </>
                     ) : (
-                      <Text>โปรดเลือกหัวข้อที่ต้องการจัดการเอกสาร</Text>
+                      <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        py={5}
+                        color="red.500"
+                      >
+                        โปรดเลือกหัวข้อที่ต้องการจัดการเอกสาร
+                      </Text>
                     )}
                   </Box>
                 </SimpleGrid>
