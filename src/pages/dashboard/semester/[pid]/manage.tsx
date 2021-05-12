@@ -43,6 +43,7 @@ import {
   GridItem,
   SimpleGrid,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -154,7 +155,7 @@ const ManageDocument = () => {
                           py={5}
                           color="red.500"
                         >
-                          กรุณาเลือกหัวข้อย่อ
+                          กรุณาเลือกหัวข้อ
                         </Text>
                         {res1.data && !res1.loading ? (
                           <>
@@ -168,7 +169,17 @@ const ManageDocument = () => {
                               )}
                             </Select>
                           </>
-                        ) : null}
+                        ) : (
+                          <>
+                            <Spinner
+                              thickness="4px"
+                              speed="0.65s"
+                              emptyColor="gray.200"
+                              color="blue.500"
+                              size="xl"
+                            />
+                          </>
+                        )}
                       </>
                     ) : (
                       <Text
@@ -185,6 +196,14 @@ const ManageDocument = () => {
               </>
             ) : (
               <>
+                <Spinner
+                  margin={10}
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                  color="blue.500"
+                  size="xl"
+                />
                 <Text margin={20}>กำลังโหลดข้อมูล</Text>
               </>
             )}
