@@ -6,16 +6,15 @@ import customTheme from "../styles/customTheme";
 import "../styles/globals.css";
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider } from "@apollo/client";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { setContext } from "@apollo/client/link/context";
 import getConfig from "next/config";
+import { createUploadLink } from "apollo-upload-client";
 
-const {
-  GRAPHQL_API_ENDPOINT,
-  SENTRY_API_ENDPOINT,
-} = getConfig().publicRuntimeConfig;
+const { GRAPHQL_API_ENDPOINT, SENTRY_API_ENDPOINT } =
+  getConfig().publicRuntimeConfig;
 const authLink = setContext((_, { headers }) => {
   let token;
   if (typeof window != "undefined") {
@@ -30,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-const httpLink = new HttpLink({ uri: GRAPHQL_API_ENDPOINT });
+const httpLink = createUploadLink({ uri: GRAPHQL_API_ENDPOINT });
 
 const client = new ApolloClient({
   uri: GRAPHQL_API_ENDPOINT,

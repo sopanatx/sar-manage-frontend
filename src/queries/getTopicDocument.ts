@@ -1,16 +1,19 @@
 import { gql } from "@apollo/client";
 
 const GET_TOPIC_DOCUMENT = gql`
-  query Query(
+  query GetTopicList(
     $getTopicBySubCategoriesGetTopicBySubCategories: GetTopicBySubCategories!
+    $getHasTopicListGetHasTopicList: HasTopicListDto!
   ) {
     getTopicBySubCategories(
       getTopicBySubCategories: $getTopicBySubCategoriesGetTopicBySubCategories
     ) {
       topicName
       topicDetails
-      createdAt
-      updatedAt
+    }
+    getHasTopicList(getHasTopicList: $getHasTopicListGetHasTopicList) {
+      hasTopicList
+      topicCount
     }
   }
 `;

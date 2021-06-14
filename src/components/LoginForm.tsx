@@ -23,8 +23,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useQuery } from "react-apollo";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
 import SIGN_IN, {
   Credentials as UsernameCredentails,
