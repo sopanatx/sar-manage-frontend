@@ -14,7 +14,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
 
 const VARIANT_COLOR: string = "blue";

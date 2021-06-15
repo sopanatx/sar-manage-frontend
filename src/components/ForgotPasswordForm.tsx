@@ -16,8 +16,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useQuery } from "react-apollo";
-import { useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import GET_SERVICE_STATUS from "../queries/getServiceStatus";
 import REQUEST_PASSWORD_RESET, {
   PasswordResetOutput,
@@ -37,10 +36,8 @@ const ForgotPasswordForm = () => {
   const [username, setUsername] = useState("");
   const [verify, setVerify] = useState(false);
   const { register, handleSubmit, errors } = useForm();
-  const [
-    requestPasswordReset,
-    { data, error, loading },
-  ] = useMutation<PasswordResetOutput>(REQUEST_PASSWORD_RESET);
+  const [requestPasswordReset, { data, error, loading }] =
+    useMutation<PasswordResetOutput>(REQUEST_PASSWORD_RESET);
   const onSubmit = () => {
     requestPasswordReset({ variables: { input: { username } } })
       .then((result) => {

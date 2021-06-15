@@ -34,7 +34,7 @@ import Header from "../../../components/layout/Header";
 import ViewSemesterForm from "../../../components/form/ViewSemesterForm";
 import { useState, useEffect } from "react";
 import GET_CATEGORY_SEMESTER from "../../../queries/searchFileBySemester";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 const VARIANT_COLOR = "blue";
 
 const viewSemesterStatus = () => {

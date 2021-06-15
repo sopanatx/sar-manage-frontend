@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import router from "next/router";
 import { useState } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 import GET_SEMESTER from "../queries/getSemester";
 const VARIANT_COLOR = "blue";
 
