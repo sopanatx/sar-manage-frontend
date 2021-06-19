@@ -104,7 +104,7 @@ const ManageDocument = () => {
         uploadFileDocumentDetails: {
           title: filename,
           index: fileIndex,
-          semesterId: "8f87e12a-61c3-4439-9976-f5e0e6d5f4cb",
+          semesterId: pid,
           subCategoryId: 1,
           //    topicId: 4,
           //  categoryId: 1,
