@@ -68,7 +68,8 @@ const ManageDocument = () => {
   const toast = useToast();
   const { data, error, loading } = useQuery(GET_CATEGORY);
   const [stateSubCategory, setStateSubCategory] = useState();
-  const [filename, setFilename] = useState();
+  const [filename, setFilename] = useState("");
+  const [fileIndex, setFileIndex] = useState("");
   const [loadTopic, res1] = useLazyQuery(GET_TOPIC_DOCUMENT, {
     fetchPolicy: "network-only",
   });
@@ -101,16 +102,25 @@ const ManageDocument = () => {
         file: selectedFile,
 
         uploadFileDocumentDetails: {
-          title: "test",
-          index: "1.0.2",
+          title: filename,
+          index: fileIndex,
           semesterId: "8f87e12a-61c3-4439-9976-f5e0e6d5f4cb",
           subCategoryId: 1,
-          topicId: 4,
-          categoryId: 1,
+          //    topicId: 4,
+          //  categoryId: 1,
         },
       },
     })
-      .then((result) => {})
+      .then((result) => {
+        toast({
+          title: `อัปโหลดไฟล์เอกสารสำเร็จ`,
+          status: "success",
+          description: `อัปโหลดไฟล์เอกสารสำเร็จ... ระบบกำลังประมวลผลและกำลังสร้างลิงก์เข้าถึง`,
+          isClosable: true,
+          position: "top-right",
+          duration: 5000,
+        });
+      })
       .catch((e) =>
         toast({
           title: `อัปโหลดไฟล์เอกสารไม่สำเร็จ`,
@@ -228,7 +238,9 @@ const ManageDocument = () => {
                                     <Input
                                       type="text"
                                       required
-                                      //onChange={(e => setFilename(e)}
+                                      onChange={(e) =>
+                                        setFilename(e.target.value)
+                                      }
                                     />
                                     <FormHelperText alignSelf="left">
                                       ชื่อไฟล์เอกสารสามารถตั้งตามต้องการได้
@@ -249,7 +261,13 @@ const ManageDocument = () => {
                                     </InputGroup>
                                     <FormControl>
                                       <FormLabel>ลำดับ</FormLabel>
-                                      <Input type="text" />
+                                      <Input
+                                        type="text"
+                                        required
+                                        onChange={(e) =>
+                                          setFileIndex(e.target.value)
+                                        }
+                                      />
                                     </FormControl>
                                   </FormControl>
                                   <Button type="submit">อัปโหลดเอกสาร</Button>
