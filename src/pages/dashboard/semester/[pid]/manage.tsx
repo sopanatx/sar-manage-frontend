@@ -91,6 +91,7 @@ const ManageDocument = () => {
 
   const [isSelectedTopic, setIsSelectedTopic] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
+  const [topic, setTopic] = useState("");
   const onFileChange = (event: any) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -217,63 +218,73 @@ const ManageDocument = () => {
                         </Text>
                         {res1.data && !res1.loading ? (
                           <>
-                            {res1.data.getHasTopicList.hasTopicList ? (
-                              <>
-                                <Select>
-                                  {res1.data.getTopicBySubCategories.map(
-                                    (item: any, index: number) => (
-                                      <option>
-                                        {index + 1}. {item.topicName}
-                                      </option>
-                                    )
-                                  )}
-                                </Select>
-                              </>
-                            ) : (
-                              <>
-                                <Text>อัปโหลดเอกสาร</Text>
-                                <form onSubmit={handleSubmit}>
-                                  <FormControl id="Filename">
-                                    <FormLabel>ชื่อไฟล์</FormLabel>
-                                    <Input
-                                      type="text"
-                                      required
-                                      onChange={(e) =>
-                                        setFilename(e.target.value)
-                                      }
-                                    />
-                                    <FormHelperText alignSelf="left">
-                                      ชื่อไฟล์เอกสารสามารถตั้งตามต้องการได้
-                                    </FormHelperText>
-                                  </FormControl>
-                                  <FormControl>
-                                    <FormLabel>ไฟล์เอกสาร</FormLabel>
-                                    <InputGroup>
-                                      <InputLeftElement
-                                        pointerEvents="none"
-                                        children={<Icon as={FiFile} />}
-                                      />
-                                      <Input
-                                        type="file"
-                                        required
-                                        onChange={(e) => onFileChange(e)}
-                                      />
-                                    </InputGroup>
-                                    <FormControl>
-                                      <FormLabel>ลำดับ</FormLabel>
-                                      <Input
-                                        type="text"
-                                        required
+                            <>
+                              <Text>อัปโหลดเอกสาร</Text>
+                              <form onSubmit={handleSubmit}>
+                                {res1.data.getHasTopicList.hasTopicList ? (
+                                  <>
+                                    <FormControl id="topic" py={2}>
+                                      <FormLabel>หัวข้อ : </FormLabel>
+                                      <Select
                                         onChange={(e) =>
-                                          setFileIndex(e.target.value)
+                                          console.log(e.target.value)
                                         }
-                                      />
+                                        value="กรุณาเลือกหัวข้อ"
+                                        required
+                                      >
+                                        {res1.data.getTopicBySubCategories.map(
+                                          (item: any, index: number) => (
+                                            <option value={item.id}>
+                                              {index + 1}. {item.topicName}
+                                            </option>
+                                          )
+                                        )}
+                                      </Select>
                                     </FormControl>
-                                  </FormControl>
-                                  <Button type="submit">อัปโหลดเอกสาร</Button>
-                                </form>
-                              </>
-                            )}
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                                <FormControl>
+                                  <FormLabel>ลำดับ : </FormLabel>
+                                  <Input
+                                    type="text"
+                                    required
+                                    onChange={(e) =>
+                                      setFileIndex(e.target.value)
+                                    }
+                                  />
+                                </FormControl>
+                                <FormControl id="Filename" py={2}>
+                                  <FormLabel>ชื่อไฟล์ : </FormLabel>
+                                  <Input
+                                    type="text"
+                                    required
+                                    onChange={(e) =>
+                                      setFilename(e.target.value)
+                                    }
+                                  />
+                                  <FormHelperText alignSelf="left">
+                                    ชื่อไฟล์เอกสารสามารถตั้งตามต้องการได้
+                                  </FormHelperText>
+                                </FormControl>
+                                <FormControl>
+                                  <FormLabel>ไฟล์เอกสาร : </FormLabel>
+                                  <InputGroup>
+                                    <InputLeftElement
+                                      pointerEvents="none"
+                                      children={<Icon as={FiFile} />}
+                                    />
+                                    <Input
+                                      type="file"
+                                      required
+                                      onChange={(e) => onFileChange(e)}
+                                    />
+                                  </InputGroup>
+                                </FormControl>
+                                <Button type="submit">อัปโหลดเอกสาร</Button>
+                              </form>
+                            </>
                           </>
                         ) : (
                           <>

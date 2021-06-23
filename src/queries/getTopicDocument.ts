@@ -8,6 +8,7 @@ const GET_TOPIC_DOCUMENT = gql`
     getTopicBySubCategories(
       getTopicBySubCategories: $getTopicBySubCategoriesGetTopicBySubCategories
     ) {
+      id
       topicName
       topicDetails
     }

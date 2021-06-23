@@ -32,6 +32,7 @@ const authLink = setContext((_, { headers }) => {
 const httpLink = createUploadLink({ uri: GRAPHQL_API_ENDPOINT });
 
 const client = new ApolloClient({
+  ssrMode: true,
   uri: GRAPHQL_API_ENDPOINT,
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
@@ -53,6 +54,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
           />
+
           <link
             href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Sarabun:wght@400;700&display=swap"
             rel="stylesheet"

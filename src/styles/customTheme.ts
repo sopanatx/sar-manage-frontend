@@ -8,7 +8,7 @@ const customTheme = extendTheme({
     body: `"Sarabun", sans-serif`,
   },
   colors: {
-    //...theme.colors,
+    ...theme.colors,
     /** Example */
     // teal: {
     ...theme.colors.teal,
@@ -20,7 +20,7 @@ const customTheme = extendTheme({
   secondary: {
     background: "#FBF7EF",
     link: "#4A5568",
-    card: "#ffffff",
+    card: "#FBF7EF",
     inputHelper: "#CBD5E0",
   },
   components: {
