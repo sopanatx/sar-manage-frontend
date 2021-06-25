@@ -184,7 +184,7 @@ const ManageDocument = () => {
                             </AccordionButton>
                           </h2>
                           {item.SubCategory.map((item: any, index: number) => (
-                            <AccordionPanel pb={4}>
+                            <AccordionPanel pb={4} key={item.id}>
                               <Link
                                 color="blue.500"
                                 as="span"
@@ -235,7 +235,10 @@ const ManageDocument = () => {
                                         <option>กรุณาเลือกหัวข้อ</option>
                                         {res1.data.getTopicBySubCategories.map(
                                           (item: any, index: number) => (
-                                            <option value={item.id}>
+                                            <option
+                                              value={item.id}
+                                              key={item.id}
+                                            >
                                               {index + 1}. {item.topicName}
                                             </option>
                                           )

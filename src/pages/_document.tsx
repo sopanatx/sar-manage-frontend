@@ -23,7 +23,7 @@ class MyDocument extends Document {
           <meta name="description" content={APP_DESCRIPTION} />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="theme-color" content="#FFFFFF" />
+          <meta name="theme-color" content="#bee3f8" />
 
           {/* add your own app-icon */}
           {/* <link
@@ -33,6 +33,10 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/app-icon.png" /> */}
           <link rel="manifest" href="/manifest.json" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Sarabun:wght@400;700&display=optional"
+            rel="stylesheet"
+          ></link>
         </Head>
         <body>
           <Main />

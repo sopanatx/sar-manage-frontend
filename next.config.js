@@ -6,6 +6,11 @@ module.exports = withPWA({
     register: true,
     sw: "/sw.js",
   },
+  eslint: {
+    // Warning: Dangerously allow production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
   async rewrites() {
     return [
       {

@@ -15,7 +15,7 @@ const Page404 = () => {
   return (
     <>
       <Box width={"45%"} margin="0 auto">
-        <Image src="/404 Error-pana.svg" alt="Not Found" />
+        <Image src="/404 Error-pana.svg" alt="NotFound" />
       </Box>
 
       <Box marginY={4}>
