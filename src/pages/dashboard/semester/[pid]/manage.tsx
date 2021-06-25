@@ -74,7 +74,7 @@ const ManageDocument = () => {
     fetchPolicy: "network-only",
   });
   const [uploadFile, {}] = useMutation(UPLOAD_FILE);
-
+  const [topic, setTopic] = useState();
   const handleClick = (SubCategory: string) => {
     loadTopic({
       variables: {
@@ -86,12 +86,13 @@ const ManageDocument = () => {
         },
       },
     });
+
     setIsSelectedTopic(true);
   };
 
   const [isSelectedTopic, setIsSelectedTopic] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
-  const [topic, setTopic] = useState("");
+
   const onFileChange = (event: any) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -101,13 +102,12 @@ const ManageDocument = () => {
     uploadFile({
       variables: {
         file: selectedFile,
-
         uploadFileDocumentDetails: {
           title: filename,
           index: fileIndex,
           semesterId: pid,
           subCategoryId: 1,
-          //    topicId: 4,
+          topicId: +topic ?? null,
           //  categoryId: 1,
         },
       },
@@ -121,6 +121,8 @@ const ManageDocument = () => {
           position: "top-right",
           duration: 5000,
         });
+        setIsSelectedTopic(false);
+        setTopic(null);
       })
       .catch((e) =>
         toast({
@@ -227,11 +229,11 @@ const ManageDocument = () => {
                                       <FormLabel>หัวข้อ : </FormLabel>
                                       <Select
                                         onChange={(e) =>
-                                          console.log(e.target.value)
+                                          setTopic(e.target.value)
                                         }
-                                        value="กรุณาเลือกหัวข้อ"
                                         required
                                       >
+                                        <option>กรุณาเลือกหัวข้อ</option>
                                         {res1.data.getTopicBySubCategories.map(
                                           (item: any, index: number) => (
                                             <option value={item.id}>
