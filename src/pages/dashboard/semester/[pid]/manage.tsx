@@ -74,7 +74,7 @@ const ManageDocument = () => {
     fetchPolicy: "network-only",
   });
   const [uploadFile, {}] = useMutation(UPLOAD_FILE);
-  const [topic, setTopic] = useState();
+  const [topic, setTopic] = useState<any | null>(null);
   const handleClick = (SubCategory: string) => {
     loadTopic({
       variables: {
@@ -107,7 +107,7 @@ const ManageDocument = () => {
           index: fileIndex,
           semesterId: pid,
           subCategoryId: 1,
-          topicId: +topic ?? null,
+          topicId: topic ?? null,
           //  categoryId: 1,
         },
       },
@@ -122,7 +122,6 @@ const ManageDocument = () => {
           duration: 5000,
         });
         setIsSelectedTopic(false);
-        setTopic(null);
       })
       .catch((e) =>
         toast({
