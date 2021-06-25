@@ -182,7 +182,7 @@ const LoginForm = () => {
                 </Stack>
 
                 <Button
-                  variantColor={VARIANT_COLOR}
+                  variantcolor={VARIANT_COLOR}
                   width="full"
                   mt={4}
                   colorScheme={VARIANT_COLOR}

@@ -1,6 +1,6 @@
 import { gql } from "apollo-boost";
 const signIn = gql`
-  mutation($input: PasswordResetDto!) {
+  mutation ($input: PasswordResetDto!) {
     requestPasswordReset(PasswordResetDto: $input) {
       status
       statusMessage
