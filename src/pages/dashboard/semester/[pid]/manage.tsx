@@ -60,6 +60,7 @@ import { gql } from "@apollo/client";
 import GET_TOPIC_DOCUMENT from "../../../../queries/getTopicDocument";
 import GET_SERVICE_STATUS from "../../../../queries/getServiceStatus";
 import UPLOAD_FILE from "../../../../mutation/uploadFile";
+import UploadDocumentForm from "../../../../components/DocumentForm/UploadDocumentForm";
 //import { useMutation } from "graphql-hooks";
 const ManageDocument = () => {
   const router = useRouter();
@@ -67,7 +68,7 @@ const ManageDocument = () => {
   const variableRef = useRef({});
   const toast = useToast();
   const { data, error, loading } = useQuery(GET_CATEGORY);
-  const [stateSubCategory, setStateSubCategory] = useState();
+  const [stateSubCategory, setStateSubCategory] = useState<any | null>(null);
   const [filename, setFilename] = useState("");
   const [fileIndex, setFileIndex] = useState("");
   const [loadTopic, res1] = useLazyQuery(GET_TOPIC_DOCUMENT, {
@@ -76,6 +77,7 @@ const ManageDocument = () => {
   const [uploadFile, {}] = useMutation(UPLOAD_FILE);
   const [topic, setTopic] = useState<any | null>(null);
   const handleClick = (SubCategory: string) => {
+    setStateSubCategory(SubCategory);
     loadTopic({
       variables: {
         getTopicBySubCategoriesGetTopicBySubCategories: {
@@ -220,6 +222,10 @@ const ManageDocument = () => {
                         {res1.data && !res1.loading ? (
                           <>
                             <>
+                              <UploadDocumentForm
+                                semester={pid}
+                                subCategory={stateSubCategory}
+                              />
                               <Text>อัปโหลดเอกสาร</Text>
                               <form onSubmit={handleSubmit}>
                                 {res1.data.getHasTopicList.hasTopicList ? (
