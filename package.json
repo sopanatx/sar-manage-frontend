@@ -8,7 +8,7 @@
     "dev": "next dev -p 7002",
     "build": "next build",
     "start": "next start",
-    "prettify": "prettier --write src/"
+    "prettify": "prettier --write src/*"
   },
   "dependencies": {
     "@apollo/client": "^3.3.20",
