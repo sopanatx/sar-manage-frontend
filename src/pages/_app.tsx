@@ -56,7 +56,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           />
 
           <link
-            href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Sarabun:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Sarabun:wght@400;700&display=optional"
             rel="stylesheet"
           ></link>
         </Head>

@@ -1,6 +1,6 @@
 import { gql } from "apollo-boost";
 const signIn = gql`
-  mutation($input: LocalAuthDto!) {
+  mutation ($input: LocalAuthDto!) {
     signIn(localAuthDto: $input) {
       accessToken
       refreshToken

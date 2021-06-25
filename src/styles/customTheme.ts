@@ -10,12 +10,12 @@ const customTheme = extendTheme({
   colors: {
     ...theme.colors,
     /** Example */
-    // teal: {
-    ...theme.colors.teal,
-    //   700: "#005661",
-    //   500: "#00838e",
-    //   300: "#4fb3be",
-    // },
+    teal: {
+      ...theme.colors.teal,
+      700: "#005661",
+      500: "#00838e",
+      300: "#4fb3be",
+    },
   },
   secondary: {
     background: "#FBF7EF",

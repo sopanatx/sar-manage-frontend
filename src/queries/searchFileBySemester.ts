@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 const searchFileBySemester = gql`
-  query($input: SearchSemesterFile!) {
+  query ($input: SearchSemesterFile!) {
     searchFileBySemester(searchSemesterFile: $input) {
       id
       categoryName

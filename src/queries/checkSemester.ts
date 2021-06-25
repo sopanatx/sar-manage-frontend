@@ -1,6 +1,6 @@
 import { gql } from "apollo-boost";
 const checkSemester = gql`
-  mutation($input: CheckSemesterDto!) {
+  mutation ($input: CheckSemesterDto!) {
     checkSemester(checkSemester: $input)
   }
 `;
