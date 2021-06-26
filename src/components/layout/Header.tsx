@@ -258,20 +258,11 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "จัดการเอกสาร",
+    href: "/dashboard",
     children: [
-      {
-        label: "อัปโหลดเอกสารใหม่",
-        subLabel: "อัปโหลดเอกสารใหม่ไปยังแต่ละหัวข้อ",
-        href: "#",
-      },
       {
         label: "จัดการเอกสาร",
         subLabel: "จัดการ / แก้ไขเอกสารที่อัปโหลดไปแล้ว",
-        href: "#",
-      },
-      {
-        label: "ประวัติ",
-        subLabel: "ประวัติการเข้าถึงเอกสาร / อัปโหลด / แก้ไข",
         href: "#",
       },
     ],
