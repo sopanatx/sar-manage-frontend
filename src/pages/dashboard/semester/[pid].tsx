@@ -30,6 +30,7 @@ const viewSemesterStatus = () => {
 
   const { data, error, loading } = useQuery(GET_CATEGORY_SEMESTER, {
     variables: { input: { semester: pid } },
+    fetchPolicy: "network-only",
   });
 
   return (
