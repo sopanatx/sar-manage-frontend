@@ -88,7 +88,7 @@ const UploadDocumentForm = (props: any) => {
           index: fileIndex,
           semesterId: semester,
           subCategoryId: subCategory,
-          topicId: topic ?? null,
+          topicId: topic,
           //  categoryId: 1,
         },
       },
