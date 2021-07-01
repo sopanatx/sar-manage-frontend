@@ -113,7 +113,7 @@ const AccountInfoForm = () => {
                   <Input
                     type="email"
                     defaultValue={data.MyAccountInfo.email}
-                    onChange={(e) => setFullname(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <FormHelperText>
                     ใช้งานอีเมลที่เข้าถึงได้ สำหรับกรณีกู้คืนรหัสผ่านบัญชี
@@ -126,7 +126,7 @@ const AccountInfoForm = () => {
                   <Input
                     type="text"
                     defaultValue={data.MyAccountInfo.username}
-                    onChange={(e) => setFullname(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                   <FormHelperText>
                     ชื่อผู้ใช้สำหรับใช้งานในการเข้าสู่ระบบ
@@ -135,7 +135,10 @@ const AccountInfoForm = () => {
 
                 <FormControl id="new-password">
                   <FormLabel>รหัสผ่าน</FormLabel>
-                  <Input type="password" />
+                  <Input
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                   <FormHelperText>
                     *หากไม่ต้องการเปลี่ยนรหัสผ่าน ให้เว้นว่างไว้
                   </FormHelperText>
