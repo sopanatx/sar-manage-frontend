@@ -146,7 +146,13 @@ const AccountInfoForm = () => {
                 <Button type="submit">ปรับปรุงข้อมูล</Button>
               </form>
             </>
-          ) : null}
+          ) : (
+            <>
+              <Stack align="center" py={8}>
+                <Spinner color="blue.500" />
+              </Stack>
+            </>
+          )}
         </Box>
       </Flex>
     </Box>
