@@ -219,7 +219,11 @@ const LoginForm = () => {
                   marginBottom={10}
                 >
                   {" "}
-                  Connecting to the server...
+                  {error ? (
+                    <>Failed to connect to the server</>
+                  ) : (
+                    <>Connecting to the server...</>
+                  )}
                 </Text>
               </Box>
             </Box>
