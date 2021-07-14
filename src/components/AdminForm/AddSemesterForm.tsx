@@ -7,9 +7,19 @@ import {
   FormLabel,
   Input,
   FormHelperText,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
 } from "@chakra-ui/react";
-
+import GET_SEMESTER from "../../queries/getSemester";
+import { useQuery } from "@apollo/client";
 const AddSemesterForm = () => {
+  const { data, error, loading } = useQuery(GET_SEMESTER);
   return (
     <>
       <Box bg="blue.100">
@@ -43,9 +53,44 @@ const AddSemesterForm = () => {
               <Button type="submit">ปรับปรุงข้อมูล</Button>
             </form>
 
-            <Text fontFamily="Kanit" fontSize={24} fontWeight="bold" py={5}>
-              จัดการปีการศึกษา
-            </Text>
+            {!loading && !error && data ? (
+              <>
+                {" "}
+                <Text fontFamily="Kanit" fontSize={24} fontWeight="bold" py={5}>
+                  จัดการปีการศึกษา
+                </Text>
+                <Table variant="simple">
+                  <Thead>
+                    <Tr>
+                      <Th>ลำดับ</Th>
+                      <Th>into</Th>
+                      <Th isNumeric>multiply by</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td>inches</Td>
+                      <Td>millimetres (mm)</Td>
+                      <Td isNumeric>25.4</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>feet</Td>
+                      <Td>centimetres (cm)</Td>
+                      <Td isNumeric>30.48</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>yards</Td>
+                      <Td>metres (m)</Td>
+                      <Td isNumeric>0.91444</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </>
+            ) : (
+              <>
+                <Text>Loading</Text>
+              </>
+            )}
           </Box>
         </Flex>
       </Box>
