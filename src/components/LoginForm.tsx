@@ -56,7 +56,7 @@ const LoginForm = () => {
   const { data, error, loading } = useQuery(GET_SERVICE_STATUS);
 
   const [signIn, { data: credentials }] = useMutation(SIGN_IN);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const [isError, setIsError] = useState(false);
 
   const changeRoute = (name: string) => {

@@ -35,7 +35,7 @@ const ForgotPasswordForm = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [verify, setVerify] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const [requestPasswordReset, { data, error, loading }] =
     useMutation<PasswordResetOutput>(REQUEST_PASSWORD_RESET);
   const onSubmit = () => {
