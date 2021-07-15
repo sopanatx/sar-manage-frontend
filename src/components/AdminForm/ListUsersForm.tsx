@@ -16,6 +16,7 @@ import {
   Td,
   TableCaption,
   useToast,
+  Stack,
 } from "@chakra-ui/react";
 import ADMIN_GET_ALL_USER from "../../queries/AdminGetAllUser";
 import { useQuery } from "@apollo/client";
@@ -82,13 +83,23 @@ const ListUsersForm = () => {
                           <Td>{data.email}</Td>
                           <Td>{data.userLevel}</Td>
                           <Td>
-                            <Button>
-                              <EditIcon color="blue.200" />
-                            </Button>
+                            <Stack direction="row" spacing={4}>
+                              <Button
+                                rightIcon={<EditIcon />}
+                                colorScheme="green"
+                                variant="outline"
+                              >
+                                ปรับปรุง
+                              </Button>
 
-                            <Button>
-                              <CloseIcon color="red.500" />
-                            </Button>
+                              <Button
+                                rightIcon={<CloseIcon />}
+                                colorScheme="red"
+                                variant="solid"
+                              >
+                                ลบ
+                              </Button>
+                            </Stack>
                           </Td>
                         </Tr>
                       </>
