@@ -21,6 +21,7 @@ import {
 import ADMIN_GET_ALL_USER from "../../queries/AdminGetAllUser";
 import { useQuery } from "@apollo/client";
 import { CloseIcon, EditIcon } from "@chakra-ui/icons";
+import router from "next/router";
 const ListUsersForm = () => {
   const toast = useToast();
   const { data, error, loading } = useQuery(ADMIN_GET_ALL_USER);
@@ -88,6 +89,9 @@ const ListUsersForm = () => {
                                 rightIcon={<EditIcon />}
                                 colorScheme="green"
                                 variant="outline"
+                                onClick={() =>
+                                  router.push(`/admin/users/${data.id}`)
+                                }
                               >
                                 ปรับปรุง
                               </Button>
