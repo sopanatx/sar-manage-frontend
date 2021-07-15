@@ -3,7 +3,7 @@ import { Container, Stack, Flex, Link, Text } from "@chakra-ui/react";
 const Footer = () => {
   return (
     <Container
-      width="full"
+      width="auto"
       marginTop="auto"
       paddingTop="1.5rem"
       paddingBottom="1.5rem"
