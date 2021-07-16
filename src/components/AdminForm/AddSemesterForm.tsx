@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import GET_SEMESTER from "../../queries/getSemester";
 import { useQuery } from "@apollo/client";
+import { CloseIcon } from "@chakra-ui/icons";
 const AddSemesterForm = () => {
   const { data, error, loading } = useQuery(GET_SEMESTER);
   return (
@@ -63,26 +64,24 @@ const AddSemesterForm = () => {
                   <Thead>
                     <Tr>
                       <Th>ลำดับ</Th>
-                      <Th>into</Th>
-                      <Th isNumeric>multiply by</Th>
+                      <Th>ชื่อปีการศึกษา</Th>
+                      <Th>Action</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    <Tr>
-                      <Td>inches</Td>
-                      <Td>millimetres (mm)</Td>
-                      <Td isNumeric>25.4</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>feet</Td>
-                      <Td>centimetres (cm)</Td>
-                      <Td isNumeric>30.48</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>yards</Td>
-                      <Td>metres (m)</Td>
-                      <Td isNumeric>0.91444</Td>
-                    </Tr>
+                    {data.getSemester.map((data: any, index: number) => (
+                      <>
+                        <Tr>
+                          <Td>{index}</Td>
+                          <Td>{data.semesterName}</Td>
+                          <Td>
+                            <Button>
+                              <CloseIcon color="red.500" />
+                            </Button>
+                          </Td>
+                        </Tr>
+                      </>
+                    ))}
                   </Tbody>
                 </Table>
               </>
