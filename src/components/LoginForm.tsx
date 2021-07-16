@@ -225,6 +225,9 @@ const LoginForm = () => {
                         py={5}
                       />
                       <Text>ไม่สามารถเชื่อมต่อ API Gateway ได้</Text>
+                      <Text fontSize="20px">
+                        reason: {error.message.replace("GraphQL error:", "")}
+                      </Text>
                     </>
                   ) : (
                     <>Connecting to the server...</>
