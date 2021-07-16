@@ -34,6 +34,7 @@ import React from "react";
 import { FaRegEnvelope, FaLock } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Reaptcha from "reaptcha";
+import { CloseIcon } from "@chakra-ui/icons";
 interface AuthResponse {
   data: string;
   error: string;
@@ -41,10 +42,6 @@ interface AuthResponse {
 }
 
 const VARIANT_COLOR: string = "facebook";
-const testlalert = () => {
-  alert(`หวัดดีค้าบ`);
-};
-
 const LoginForm = () => {
   const router = useRouter();
   const toast = useToast();
@@ -220,7 +217,15 @@ const LoginForm = () => {
                 >
                   {" "}
                   {error ? (
-                    <>Failed to connect to the server</>
+                    <>
+                      <CloseIcon
+                        color="red.500"
+                        align="center"
+                        boxSize="4em"
+                        py={5}
+                      />
+                      <Text>ไม่สามารถเชื่อมต่อ API Gateway ได้</Text>
+                    </>
                   ) : (
                     <>Connecting to the server...</>
                   )}
