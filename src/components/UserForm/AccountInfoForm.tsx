@@ -24,7 +24,6 @@ const VARIANT_COLOR = "blue";
 
 const AccountInfoForm = () => {
   const toast = useToast();
-
   const [fullname, setFullname] = useState<String | null>();
   const [email, setEmail] = useState<String | null>();
   const [username, setUsername] = useState<String | null>();
@@ -58,7 +57,7 @@ const AccountInfoForm = () => {
       })
       .catch((e) => {
         toast({
-          title: `อัปโหลดไฟล์เอกสารไม่สำเร็จ`,
+          title: `ปรับปรุงข้อมูลล้มเหลว`,
           status: "error",
           description: `${e}`,
           isClosable: true,
