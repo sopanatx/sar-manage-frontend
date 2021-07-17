@@ -49,7 +49,7 @@ const ListUsersForm = () => {
             px={5}
             py={10}
             width="full"
-            minWidth="100px"
+            minWidth="300px"
             as="td"
             borderRadius={4}
             textAlign="center"

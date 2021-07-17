@@ -23,14 +23,18 @@ import { useState, useEffect } from "react";
 import GET_CATEGORY_SEMESTER from "../../../queries/searchFileBySemester";
 import { useQuery } from "@apollo/client";
 const VARIANT_COLOR = "blue";
+import { CloseIcon, EditIcon } from "@chakra-ui/icons";
 
 const viewSemesterStatus = () => {
   const router = useRouter();
   const { pid } = router.query;
 
   const { data, error, loading } = useQuery(GET_CATEGORY_SEMESTER, {
-    variables: { input: { semester: pid } },
-    fetchPolicy: "network-only",
+    variables: {
+      searchFileBySemester: { semester: pid },
+      CheckSemesterDto: { id: pid },
+    },
+    fetchPolicy: "no-cache",
   });
 
   return (
@@ -54,11 +58,11 @@ const viewSemesterStatus = () => {
             // boxShadow="lg"
             bg="white"
           >
-            {!loading && !error && data ? (
+            {!loading && !error ? (
               <>
                 <Box>
                   <Text fontFamily="kanit" fontSize="1xl">
-                    สถานะการอัปโหลดเอกสารภาคเรียนที่ : {pid}
+                    สถานะการอัปโหลดเอกสาร : {data.getSemesterById.semesterName}
                   </Text>
                   <Icon
                     as={WarningIcon}
@@ -123,7 +127,24 @@ const viewSemesterStatus = () => {
               </>
             ) : (
               <>
-                <Text>Loading</Text>
+                {error ? (
+                  <>
+                    <CloseIcon
+                      color="red.500"
+                      align="center"
+                      boxSize="7em"
+                      py={5}
+                    />
+
+                    <Text>{error.message.replace("GraphQL error:", "")}</Text>
+                  </>
+                ) : (
+                  <>
+                    <Text fontFamily="kanit" fontSize="1xl">
+                      Loading
+                    </Text>
+                  </>
+                )}
               </>
             )}
           </Box>

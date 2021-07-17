@@ -1,25 +1,22 @@
 import { gql } from "@apollo/client";
 const searchFileBySemester = gql`
-  query ($input: SearchSemesterFile!) {
-    searchFileBySemester(searchSemesterFile: $input) {
+  query Query(
+    $searchFileBySemester: SearchSemesterFile!
+    $CheckSemesterDto: CheckSemesterDto!
+  ) {
+    searchFileBySemester(searchSemesterFile: $searchFileBySemester) {
       id
       categoryName
+      isAvailable
       FileUploadData {
         index
       }
     }
-    # getCategories {
-    #   id
-    #   categoryName
-    #   SubCategory {
-    #     id
-    #     subCategoryName
-    #     subCategoryDescription
-    #     isAvailable
-    #     createdAt
-    #     updatedAt
-    #   }
-    # }
+    getSemesterById(CheckSemesterDto: $CheckSemesterDto) {
+      id
+      semesterName
+      isAvailable
+    }
   }
 `;
 
