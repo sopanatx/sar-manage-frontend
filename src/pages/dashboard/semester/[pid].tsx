@@ -64,22 +64,6 @@ const viewSemesterStatus = () => {
                   <Text fontFamily="kanit" fontSize="1xl">
                     สถานะการอัปโหลดเอกสาร : {data.getSemesterById.semesterName}
                   </Text>
-                  <Icon
-                    as={WarningIcon}
-                    w={10}
-                    h={10}
-                    margin={3}
-                    color="orange.400"
-                  />
-                  <Text
-                    fontFamily="kanit"
-                    fontSize="2xl"
-                    fontWeight="bold"
-                    px={5}
-                    color="green.400"
-                  >
-                    ยังอัปโหลดไม่ครบ
-                  </Text>
 
                   <Button
                     margin={10}
@@ -87,11 +71,11 @@ const viewSemesterStatus = () => {
                     onClick={() =>
                       router.push(`/dashboard/semester/${pid}/manage`)
                     }
+                    colorSchema="primary"
                   >
                     จัดการหลักฐาน
                   </Button>
                   <Table variant="striped" colorScheme={VARIANT_COLOR}>
-                    <TableCaption>-- Description --</TableCaption>
                     <Thead>
                       <Tr>
                         <Th>องค์ประกอบ</Th>
