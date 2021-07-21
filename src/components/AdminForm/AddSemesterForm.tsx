@@ -16,11 +16,11 @@ import {
   Td,
   TableCaption,
 } from "@chakra-ui/react";
-import GET_SEMESTER from "../../queries/getSemester";
+import GET_ALL_SEMESTERS_QUERY from "../../queries/AdminGetAllSemester";
 import { useQuery } from "@apollo/client";
 import { CloseIcon } from "@chakra-ui/icons";
 const AddSemesterForm = () => {
-  const { data, error, loading } = useQuery(GET_SEMESTER);
+  const { data, error, loading } = useQuery(GET_ALL_SEMESTERS_QUERY);
   return (
     <>
       <Box bg="blue.100">
@@ -51,7 +51,7 @@ const AddSemesterForm = () => {
                   ตัวเลข หรือ ข้อความ เช่น "ปีการศึกษา 2565"
                 </FormHelperText>
               </FormControl>
-              <Button type="submit">ปรับปรุงข้อมูล</Button>
+              <Button type="submit">เพิ่มข้อมูล</Button>
             </form>
 
             {!loading && !error && data ? (
@@ -69,25 +69,41 @@ const AddSemesterForm = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data.getSemester.map((data: any, index: number) => (
-                      <>
-                        <Tr>
-                          <Td>{index}</Td>
-                          <Td>{data.semesterName}</Td>
-                          <Td>
-                            <Button>
-                              <CloseIcon color="red.500" />
-                            </Button>
-                          </Td>
-                        </Tr>
-                      </>
-                    ))}
+                    {data.AdminGetAllSemester.map(
+                      (data: any, index: number) => (
+                        <>
+                          <Tr>
+                            <Td>{index + 1}</Td>
+                            <Td>{data.semesterName}</Td>
+                            <Td>
+                              <Button>
+                                <CloseIcon color="red.500" />
+                              </Button>
+                            </Td>
+                          </Tr>
+                        </>
+                      )
+                    )}
                   </Tbody>
                 </Table>
               </>
             ) : (
               <>
-                <Text>Loading</Text>
+                {error ? (
+                  <>
+                    <CloseIcon
+                      color="red.500"
+                      align="center"
+                      boxSize="7em"
+                      py={5}
+                    />
+                    <Text>{error.message.replace("GraphQL error:", "")}</Text>
+                  </>
+                ) : (
+                  <>
+                    <Text> Loading ..</Text>
+                  </>
+                )}
               </>
             )}
           </Box>
