@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import {
   Box,
   Button,
@@ -17,14 +18,33 @@ import {
   TableCaption,
   useToast,
   Stack,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
 } from "@chakra-ui/react";
 import ADMIN_GET_ALL_USER from "../../queries/AdminGetAllUser";
 import { useQuery } from "@apollo/client";
 import { CloseIcon, EditIcon } from "@chakra-ui/icons";
 import router from "next/router";
+interface isOpenType {
+  dialog: boolean;
+  id: string;
+  name: string;
+}
+
 const ListUsersForm = () => {
   const toast = useToast();
   const { data, error, loading } = useQuery(ADMIN_GET_ALL_USER);
+  const [isOpen, setIsOpen] = useState<isOpenType>({
+    dialog: false,
+    id: "",
+    name: "",
+  });
+  const onClose = () => setIsOpen({ dialog: false, id: "", name: "" });
+  const cancelRef = useRef<any>();
   if (!loading && error) {
     toast({
       title: `ไม่สามารถรับข้อมูลได้`,
@@ -38,6 +58,45 @@ const ListUsersForm = () => {
   return (
     <>
       <Box bg="blue.100">
+        {/* <Button
+          colorScheme="red"
+          // onClick={() => setIsOpen({ dialog: true, id: "" })}
+        >
+          Delete Customer
+        </Button> */}
+        <AlertDialog
+          isOpen={isOpen.dialog}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                ยืนยันการลบข้อมูล
+              </AlertDialogHeader>
+
+              <AlertDialogBody>
+                คุณแน่ใจว่าจะบัญชีของ
+                <Text fontWeight="bold" color="red.400">
+                  {isOpen.name}{" "}
+                </Text>{" "}
+                {""}หรือไม่ เจ้าของบัญชีนี้
+                จะไม่สามารถเข้าถึงบัญชีนี้ได้อีกต่อไป และ
+                การกระทำดังกล่าวจะไม่สามารถกู้คืนได้ ทั้งนี้
+                ไฟล์ที่ได้อัปโหลดไว้ จะไม่ถูกลบออกไปด้วย
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onClose}>
+                  ยกเลิก
+                </Button>
+                <Button colorScheme="red" onClick={onClose} ml={3}>
+                  ยืนยันการลบ
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
         <Flex
           minHeight="100vh"
           width="full"
@@ -88,7 +147,7 @@ const ListUsersForm = () => {
                               <Button
                                 rightIcon={<EditIcon />}
                                 colorScheme="green"
-                                variant="outline"
+                                variant="ghost"
                                 onClick={() =>
                                   router.push(`/admin/users/${data.id}`)
                                 }
@@ -99,7 +158,14 @@ const ListUsersForm = () => {
                               <Button
                                 rightIcon={<CloseIcon />}
                                 colorScheme="red"
-                                variant="solid"
+                                variant="ghost"
+                                onClick={() =>
+                                  setIsOpen({
+                                    dialog: true,
+                                    id: data.id,
+                                    name: data.fullname,
+                                  })
+                                }
                               >
                                 ลบ
                               </Button>
