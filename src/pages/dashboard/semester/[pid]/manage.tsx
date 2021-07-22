@@ -120,6 +120,7 @@ const ManageDocument = () => {
             borderRadius={8}
             textAlign="center"
             bg="white"
+            overflow="auto"
           >
             <Heading color="gray.600">
               เลือกหัวข้อที่ต้องการเพิ่ม / แก้ไข
