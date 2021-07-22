@@ -26,25 +26,66 @@ import {
   AlertDialogOverlay,
 } from "@chakra-ui/react";
 import ADMIN_GET_ALL_USER from "../../queries/AdminGetAllUser";
-import { useQuery } from "@apollo/client";
-import { CloseIcon, EditIcon } from "@chakra-ui/icons";
+import { useQuery, useMutation } from "@apollo/client";
+import { CloseIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
 import router from "next/router";
+import DELETE_USER_MUTATION from "../../mutation/AdminDeleteUser";
 interface isOpenType {
   dialog: boolean;
   id: string;
   name: string;
 }
 
+interface isDeleteType {
+  loading: boolean;
+  error: boolean;
+  data: any;
+}
+
 const ListUsersForm = () => {
   const toast = useToast();
   const { data, error, loading } = useQuery(ADMIN_GET_ALL_USER);
+  const [deleteUser, {}] = useMutation(DELETE_USER_MUTATION);
   const [isOpen, setIsOpen] = useState<isOpenType>({
     dialog: false,
     id: "",
     name: "",
   });
+
   const onClose = () => setIsOpen({ dialog: false, id: "", name: "" });
   const cancelRef = useRef<any>();
+  const onDeleteUser = (event: any) => {
+    event.preventDefault();
+    deleteUser({
+      variables: {
+        adminDeleteUser: {
+          userId: isOpen.id,
+        },
+      },
+    })
+      .then(() => {
+        toast({
+          title: `สำเร็จ`,
+          status: "warning",
+          description: `ลบข้อมูลสำเร็จแล้ว`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+        setIsOpen({ dialog: false, id: "", name: "" });
+      })
+      .catch((err) => {
+        toast({
+          title: `ลบไม่สำเร็จ`,
+          status: "error",
+          description: `${err.message.replace("GraphQL error:", "")}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+      });
+  };
+
   if (!loading && error) {
     toast({
       title: `ไม่สามารถรับข้อมูลได้`,
@@ -90,7 +131,11 @@ const ListUsersForm = () => {
                 <Button ref={cancelRef} onClick={onClose}>
                   ยกเลิก
                 </Button>
-                <Button colorScheme="red" onClick={onClose} ml={3}>
+                <Button
+                  colorScheme="red"
+                  onClick={(e) => onDeleteUser(e)}
+                  ml={3}
+                >
                   ยืนยันการลบ
                 </Button>
               </AlertDialogFooter>
@@ -115,13 +160,24 @@ const ListUsersForm = () => {
             boxShadow="md"
             bg="white"
             maxWidth="fit-content"
+            overflow="auto"
           >
             {!loading && !error && data ? (
               <>
                 <Text fontFamily="Kanit" fontSize={24} fontWeight="bold">
                   แสดงข้อมูลผู้ใช้ทั้งหมด
                 </Text>
-
+                <Button
+                  alignSelf="right"
+                  leftIcon={<AddIcon />}
+                  colorScheme="teal"
+                  variant="outline"
+                  py={15}
+                  onClick={() => router.push(`/admin/users/add`)}
+                >
+                  {" "}
+                  เพิ่มผู้ใช้งาน{" "}
+                </Button>
                 <Box overflowX="auto">
                   {" "}
                   <Table variant="simple" size="md">

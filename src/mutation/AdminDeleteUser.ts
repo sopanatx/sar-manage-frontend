@@ -5,3 +5,4 @@ const DELETE_USER_MUTATION = gql`
     AdminDeleteUser(AdminDeleteUserDto: $adminDeleteUser)
   }
 `;
+export default DELETE_USER_MUTATION;
