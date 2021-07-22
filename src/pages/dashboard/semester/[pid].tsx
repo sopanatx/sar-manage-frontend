@@ -57,10 +57,11 @@ const viewSemesterStatus = () => {
             textAlign="center"
             // boxShadow="lg"
             bg="white"
+            overflowY="auto"
           >
             {!loading && !error ? (
               <>
-                <Box>
+                <Box overflowY="auto">
                   <Text fontFamily="kanit" fontSize="1xl">
                     สถานะการอัปโหลดเอกสาร : {data.getSemesterById.semesterName}
                   </Text>
@@ -75,38 +76,41 @@ const viewSemesterStatus = () => {
                   >
                     จัดการหลักฐาน
                   </Button>
-                  <Table variant="striped" colorScheme={VARIANT_COLOR}>
-                    <Thead>
-                      <Tr>
-                        <Th>องค์ประกอบ</Th>
-                        <Th>หลักฐาน</Th>
-                        <Th>แก้ไขล่าสุด</Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody>
-                      {data.searchFileBySemester.map(
-                        (item: any, index: any) => (
-                          <>
-                            <Tr>
-                              <Td>{item.categoryName}</Td>
-                              <Td>
-                                <HStack spacing={3}>
-                                  {item.FileUploadData.map(
-                                    (item: any, index: any) => (
-                                      <Tag colorScheme="green">
-                                        {item.index}
-                                      </Tag>
-                                    )
-                                  )}
-                                </HStack>
-                              </Td>
-                              <Td>-</Td>
-                            </Tr>
-                          </>
-                        )
-                      )}
-                    </Tbody>
-                  </Table>
+                  <Box overflowX="auto" overflowY="auto">
+                    {" "}
+                    <Table variant="striped" colorScheme={VARIANT_COLOR}>
+                      <Thead>
+                        <Tr>
+                          <Th>องค์ประกอบ</Th>
+                          <Th>หลักฐาน</Th>
+                          <Th>แก้ไขล่าสุด</Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {data.searchFileBySemester.map(
+                          (item: any, index: any) => (
+                            <>
+                              <Tr>
+                                <Td>{item.categoryName}</Td>
+                                <Td>
+                                  <HStack spacing={3}>
+                                    {item.FileUploadData.map(
+                                      (item: any, index: any) => (
+                                        <Tag colorScheme="green">
+                                          {item.index}
+                                        </Tag>
+                                      )
+                                    )}
+                                  </HStack>
+                                </Td>
+                                <Td>-</Td>
+                              </Tr>
+                            </>
+                          )
+                        )}
+                      </Tbody>
+                    </Table>
+                  </Box>
                 </Box>
               </>
             ) : (
