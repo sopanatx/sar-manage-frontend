@@ -122,60 +122,63 @@ const ListUsersForm = () => {
                   แสดงข้อมูลผู้ใช้ทั้งหมด
                 </Text>
 
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th>ลำดับ</Th>
-                      <Th>ชื่อ</Th>
-                      <Th>Username</Th>
-                      <Th>อีเมล</Th>
-                      <Th>สิทธิ์</Th>
-                      <Th>Action</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {data.AdminGetAllUser.map((data: any, index: number) => (
-                      <>
-                        <Tr>
-                          <Td>{index + 1}</Td>
-                          <Td>{data.fullname}</Td>
-                          <Td>{data.username}</Td>
-                          <Td>{data.email}</Td>
-                          <Td>{data.userLevel}</Td>
-                          <Td>
-                            <Stack direction="row" spacing={4}>
-                              <Button
-                                rightIcon={<EditIcon />}
-                                colorScheme="green"
-                                variant="ghost"
-                                onClick={() =>
-                                  router.push(`/admin/users/${data.id}`)
-                                }
-                              >
-                                ปรับปรุง
-                              </Button>
+                <Box overflowX="auto">
+                  {" "}
+                  <Table variant="simple" size="md">
+                    <Thead>
+                      <Tr>
+                        <Th>ลำดับ</Th>
+                        <Th>ชื่อ</Th>
+                        <Th>Username</Th>
+                        <Th>อีเมล</Th>
+                        <Th>สิทธิ์</Th>
+                        <Th>Action</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {data.AdminGetAllUser.map((data: any, index: number) => (
+                        <>
+                          <Tr>
+                            <Td>{index + 1}</Td>
+                            <Td>{data.fullname}</Td>
+                            <Td>{data.username}</Td>
+                            <Td>{data.email}</Td>
+                            <Td>{data.userLevel}</Td>
+                            <Td>
+                              <Stack direction="row" spacing={4}>
+                                <Button
+                                  rightIcon={<EditIcon />}
+                                  colorScheme="green"
+                                  variant="ghost"
+                                  onClick={() =>
+                                    router.push(`/admin/users/${data.id}`)
+                                  }
+                                >
+                                  ปรับปรุง
+                                </Button>
 
-                              <Button
-                                rightIcon={<CloseIcon />}
-                                colorScheme="red"
-                                variant="ghost"
-                                onClick={() =>
-                                  setIsOpen({
-                                    dialog: true,
-                                    id: data.id,
-                                    name: data.fullname,
-                                  })
-                                }
-                              >
-                                ลบ
-                              </Button>
-                            </Stack>
-                          </Td>
-                        </Tr>
-                      </>
-                    ))}
-                  </Tbody>
-                </Table>
+                                <Button
+                                  rightIcon={<CloseIcon />}
+                                  colorScheme="red"
+                                  variant="ghost"
+                                  onClick={() =>
+                                    setIsOpen({
+                                      dialog: true,
+                                      id: data.id,
+                                      name: data.fullname,
+                                    })
+                                  }
+                                >
+                                  ลบ
+                                </Button>
+                              </Stack>
+                            </Td>
+                          </Tr>
+                        </>
+                      ))}
+                    </Tbody>
+                  </Table>
+                </Box>
               </>
             ) : (
               <>
