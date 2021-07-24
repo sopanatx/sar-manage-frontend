@@ -40,7 +40,9 @@ interface isOpenType {
 
 const AddSemesterForm = () => {
   const toast = useToast();
-  const { data, error, loading } = useQuery(GET_ALL_SEMESTERS_QUERY);
+  const { loading, error, data, refetch } = useQuery(GET_ALL_SEMESTERS_QUERY, {
+    fetchPolicy: "no-cache",
+  });
   const [isOpen, setIsOpen] = useState<isOpenType>({
     dialog: false,
     id: "",
@@ -71,6 +73,8 @@ const AddSemesterForm = () => {
           position: "top-right",
           duration: 10000,
         });
+
+        refetch();
         setIsOpen({ dialog: false, id: "", name: "" });
       })
       .catch(() => {
@@ -82,6 +86,7 @@ const AddSemesterForm = () => {
           position: "top-right",
           duration: 10000,
         });
+        refetch();
         setIsOpen({ dialog: false, id: "", name: "" });
       });
   };
@@ -89,7 +94,12 @@ const AddSemesterForm = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     addSemester({
-      variables: { adminCreateSemester: { semester: semesterName } },
+      variables: {
+        adminCreateSemester: { semester: semesterName },
+        refetchQueries: {
+          query: GET_ALL_SEMESTERS_QUERY,
+        },
+      },
     })
       .then(() => {
         toast({
@@ -100,6 +110,7 @@ const AddSemesterForm = () => {
           position: "top-right",
           duration: 10000,
         });
+        refetch();
       })
       .catch(() => {
         toast({
@@ -170,6 +181,7 @@ const AddSemesterForm = () => {
                 <Text fontFamily="Kanit" fontSize={24} fontWeight="bold">
                   เพิ่มปีการศึกษา
                 </Text>
+                <Button onClick={() => refetch()}> Refetch</Button>
                 <form onSubmit={(e) => onSubmit(e)}>
                   <FormControl id="fullname" py={5} isRequired>
                     <FormLabel>ชื่อปีการศึกษา</FormLabel>
@@ -187,7 +199,7 @@ const AddSemesterForm = () => {
                   จัดการปีการศึกษา
                 </Text>
                 <Box overflowY="auto" overflowX="auto">
-                  <Table variant="striped" overflow="auto">
+                  <Table variant="striped" overflow="auto" colorScheme="blue">
                     <Thead>
                       <Tr>
                         <Th>ลำดับ</Th>

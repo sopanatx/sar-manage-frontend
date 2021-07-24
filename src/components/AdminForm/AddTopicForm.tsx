@@ -71,8 +71,8 @@ interface deleteSubCategoryType {
 }
 const AddTopicForm = () => {
   const toast = useToast();
-  const { loading, error, data } = useQuery(ADMIN_GET_ALL_CATEGORY, {
-    fetchPolicy: "network-only",
+  const { loading, error, data, refetch } = useQuery(ADMIN_GET_ALL_CATEGORY, {
+    fetchPolicy: "no-cache",
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef<any>();
@@ -110,6 +110,7 @@ const AddTopicForm = () => {
           position: "top-right",
           duration: 10000,
         });
+        refetch();
         setCategory("");
         setSubCategory("");
       })
@@ -143,6 +144,7 @@ const AddTopicForm = () => {
           position: "top-right",
           duration: 10000,
         });
+        refetch();
         onCloseAlert();
         setSubCategoryDelete({ id: 0, name: "", isShow: false });
       })
@@ -214,15 +216,7 @@ const AddTopicForm = () => {
               {" "}
               จัดการหัวข้อเอกสาร{" "}
             </Heading>
-            <Alert status="error" borderRadius={9}>
-              <AlertIcon />
-              <AlertTitle mr={2}>คำเตือน</AlertTitle>
-              <AlertDescription>
-                หากจะทดสอบระบบ ลบ องค์ประกอบ ให้สร้างใหม่ แล้วลบเท่านั้น
-                ห้ามลบที่มีอยู่แล้ว
-              </AlertDescription>
-              <CloseButton position="absolute" right="8px" top="8px" />
-            </Alert>
+
             {!loading && !error && data ? (
               <>
                 <Button
