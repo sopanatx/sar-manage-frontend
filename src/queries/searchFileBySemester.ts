@@ -10,6 +10,7 @@ const searchFileBySemester = gql`
       isAvailable
       FileUploadData {
         index
+        createdAt
       }
     }
     getSemesterById(CheckSemesterDto: $CheckSemesterDto) {

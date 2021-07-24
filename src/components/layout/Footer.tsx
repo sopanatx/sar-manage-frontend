@@ -3,11 +3,12 @@ import { Container, Stack, Flex, Link, Text } from "@chakra-ui/react";
 const Footer = () => {
   return (
     <Container
-      width="auto"
+      width="container.xl"
       marginTop="auto"
       paddingTop="1.5rem"
       paddingBottom="1.5rem"
       backgroundColor="white"
+      overflow="auto"
     >
       <Stack
         flexDirection={["column", "row"]}

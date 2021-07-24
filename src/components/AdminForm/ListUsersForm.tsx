@@ -24,6 +24,7 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Spinner,
 } from "@chakra-ui/react";
 import ADMIN_GET_ALL_USER from "../../queries/AdminGetAllUser";
 import { useQuery, useMutation } from "@apollo/client";
@@ -250,7 +251,16 @@ const ListUsersForm = () => {
                   </>
                 ) : (
                   <>
-                    <Text> Loading ..</Text>
+                    <Stack alignItems="center">
+                      {" "}
+                      <Spinner
+                        thickness="4px"
+                        speed="0.65s"
+                        emptyColor="gray.200"
+                        color="blue.500"
+                        size="xl"
+                      />{" "}
+                    </Stack>
                   </>
                 )}
               </>

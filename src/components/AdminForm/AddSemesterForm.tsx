@@ -22,6 +22,8 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   useToast,
+  Spinner,
+  Stack,
 } from "@chakra-ui/react";
 import GET_ALL_SEMESTERS_QUERY from "../../queries/AdminGetAllSemester";
 import { useQuery, useMutation } from "@apollo/client";
@@ -184,41 +186,43 @@ const AddSemesterForm = () => {
                 <Text fontFamily="Kanit" fontSize={24} fontWeight="bold" py={5}>
                   จัดการปีการศึกษา
                 </Text>
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th>ลำดับ</Th>
-                      <Th>ชื่อปีการศึกษา</Th>
-                      <Th>Action</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {data.AdminGetAllSemester.map(
-                      (data: any, index: number) => (
-                        <>
-                          <Tr>
-                            <Td>{index + 1}</Td>
-                            <Td>{data.semesterName}</Td>
-                            <Td>
-                              <Button
-                                leftIcon={<CloseIcon color="red.500" />}
-                                onClick={() =>
-                                  setIsOpen({
-                                    dialog: true,
-                                    id: data.id,
-                                    name: data.semesterName,
-                                  })
-                                }
-                              >
-                                ลบ
-                              </Button>
-                            </Td>
-                          </Tr>
-                        </>
-                      )
-                    )}
-                  </Tbody>
-                </Table>
+                <Box overflowY="auto" overflowX="auto">
+                  <Table variant="striped" overflow="auto">
+                    <Thead>
+                      <Tr>
+                        <Th>ลำดับ</Th>
+                        <Th>ชื่อปีการศึกษา</Th>
+                        <Th>Action</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {data.AdminGetAllSemester.map(
+                        (data: any, index: number) => (
+                          <>
+                            <Tr>
+                              <Td>{index + 1}</Td>
+                              <Td>{data.semesterName}</Td>
+                              <Td>
+                                <Button
+                                  leftIcon={<CloseIcon color="red.500" />}
+                                  onClick={() =>
+                                    setIsOpen({
+                                      dialog: true,
+                                      id: data.id,
+                                      name: data.semesterName,
+                                    })
+                                  }
+                                >
+                                  ลบ
+                                </Button>
+                              </Td>
+                            </Tr>
+                          </>
+                        )
+                      )}
+                    </Tbody>
+                  </Table>
+                </Box>
               </>
             ) : (
               <>
@@ -234,7 +238,16 @@ const AddSemesterForm = () => {
                   </>
                 ) : (
                   <>
-                    <Text> Loading ..</Text>
+                    <Stack alignItems="center">
+                      {" "}
+                      <Spinner
+                        thickness="4px"
+                        speed="0.65s"
+                        emptyColor="gray.200"
+                        color="blue.500"
+                        size="xl"
+                      />{" "}
+                    </Stack>
                   </>
                 )}
               </>

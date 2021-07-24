@@ -83,7 +83,7 @@ const viewSemesterStatus = () => {
                         <Tr>
                           <Th>องค์ประกอบ</Th>
                           <Th>หลักฐาน</Th>
-                          <Th>แก้ไขล่าสุด</Th>
+                          <Th>จำนวนเอกสาร</Th>
                         </Tr>
                       </Thead>
                       <Tbody>
@@ -103,7 +103,7 @@ const viewSemesterStatus = () => {
                                     )}
                                   </HStack>
                                 </Td>
-                                <Td>-</Td>
+                                <Td>{item.FileUploadData.length}</Td>
                               </Tr>
                             </>
                           )
