@@ -55,7 +55,7 @@ const AddSemesterForm = () => {
   const [addSemester, { loading: addLoading }] = useMutation(
     ADMIN_CREATE_SEMESTER_MUTATION
   );
-  const [semesterName, setSemesterName] = useState < String || null > "";
+  const [semesterName, setSemesterName] = useState("");
   const onDelete = (e: any) => {
     e.preventDefault();
     deleteSemester({
