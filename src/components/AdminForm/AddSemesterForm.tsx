@@ -181,7 +181,6 @@ const AddSemesterForm = () => {
                 <Text fontFamily="Kanit" fontSize={24} fontWeight="bold">
                   เพิ่มปีการศึกษา
                 </Text>
-                <Button onClick={() => refetch()}> Refetch</Button>
                 <form onSubmit={(e) => onSubmit(e)}>
                   <FormControl id="fullname" py={5} isRequired>
                     <FormLabel>ชื่อปีการศึกษา</FormLabel>
