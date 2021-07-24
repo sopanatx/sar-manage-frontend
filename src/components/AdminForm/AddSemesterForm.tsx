@@ -41,12 +41,9 @@ interface isOpenType {
 
 const AddSemesterForm = () => {
   const toast = useToast();
-  const { loading, error, data, refetch } = useQuery<String | null>(
-    GET_ALL_SEMESTERS_QUERY,
-    {
-      fetchPolicy: "no-cache",
-    }
-  );
+  const { loading, error, data, refetch } = useQuery(GET_ALL_SEMESTERS_QUERY, {
+    fetchPolicy: "no-cache",
+  });
   const [isOpen, setIsOpen] = useState<isOpenType>({
     dialog: false,
     id: "",
@@ -58,6 +55,7 @@ const AddSemesterForm = () => {
   const [addSemester, { loading: addLoading }] = useMutation(
     ADMIN_CREATE_SEMESTER_MUTATION
   );
+
   const [semesterName, setSemesterName] = useState("");
   const onDelete = (e: any) => {
     e.preventDefault();
