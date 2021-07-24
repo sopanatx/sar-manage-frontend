@@ -28,6 +28,8 @@ import { useQuery, useMutation } from "@apollo/client";
 import { CloseIcon } from "@chakra-ui/icons";
 import { useState, useRef } from "react";
 import ADMIN_DELETE_SEMESTER_MUTATION from "../../mutation/AdminDeleteSemester";
+import ADMIN_CREATE_USER_MUTATION from "../../mutation/AdminCreateUser";
+import ADMIN_CREATE_SEMESTER_MUTATION from "../../mutation/AdminCreateSemester";
 interface isOpenType {
   dialog: boolean;
   id: string;
@@ -45,6 +47,10 @@ const AddSemesterForm = () => {
   const onClose = () => setIsOpen({ dialog: false, id: "", name: "" });
   const cancelRef = useRef<any>();
   const [deleteSemester, {}] = useMutation(ADMIN_DELETE_SEMESTER_MUTATION);
+  const [addSemester, { loading: addLoading }] = useMutation(
+    ADMIN_CREATE_SEMESTER_MUTATION
+  );
+  const [semesterName, setSemesterName] = useState<String>("");
   const onDelete = (e: any) => {
     e.preventDefault();
     deleteSemester({
@@ -75,6 +81,33 @@ const AddSemesterForm = () => {
           duration: 10000,
         });
         setIsOpen({ dialog: false, id: "", name: "" });
+      });
+  };
+
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    addSemester({
+      variables: { adminCreateSemester: { semester: semesterName } },
+    })
+      .then(() => {
+        toast({
+          title: `สำเร็จ`,
+          status: "success",
+          description: `เพิ่มปีการศึกษาสำเร็จ`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+      })
+      .catch(() => {
+        toast({
+          title: `ผิดพลาด`,
+          status: "error",
+          description: `${error.message.replace("GraphQL error:", "")}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
       });
   };
   return (
@@ -135,10 +168,13 @@ const AddSemesterForm = () => {
                 <Text fontFamily="Kanit" fontSize={24} fontWeight="bold">
                   เพิ่มปีการศึกษา
                 </Text>
-                <form>
+                <form onSubmit={(e) => onSubmit(e)}>
                   <FormControl id="fullname" py={5} isRequired>
                     <FormLabel>ชื่อปีการศึกษา</FormLabel>
-                    <Input type="text" />
+                    <Input
+                      type="text"
+                      onChange={(e) => setSemesterName(e.target.value)}
+                    />
                     <FormHelperText>
                       ตัวเลข หรือ ข้อความ เช่น "ปีการศึกษา 2565"
                     </FormHelperText>
