@@ -103,7 +103,7 @@ const AddSemesterForm = () => {
         toast({
           title: `ผิดพลาด`,
           status: "error",
-          description: `${error.message.replace("GraphQL error:", "")}`,
+          description: `เพิ่มปีการศึกษาไม่สำเร็จ โปรดตรวจสอบข้อมูลอีกครั้ง`,
           isClosable: true,
           position: "top-right",
           duration: 10000,
