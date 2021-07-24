@@ -24,10 +24,11 @@ import {
   useToast,
   Spinner,
   Stack,
+  IconButton,
 } from "@chakra-ui/react";
 import GET_ALL_SEMESTERS_QUERY from "../../queries/AdminGetAllSemester";
 import { useQuery, useMutation } from "@apollo/client";
-import { CloseIcon } from "@chakra-ui/icons";
+import { CloseIcon, RepeatIcon } from "@chakra-ui/icons";
 import { useState, useRef } from "react";
 import ADMIN_DELETE_SEMESTER_MUTATION from "../../mutation/AdminDeleteSemester";
 import ADMIN_CREATE_USER_MUTATION from "../../mutation/AdminCreateUser";
@@ -54,7 +55,7 @@ const AddSemesterForm = () => {
   const [addSemester, { loading: addLoading }] = useMutation(
     ADMIN_CREATE_SEMESTER_MUTATION
   );
-  const [semesterName, setSemesterName] = useState<String>("");
+  const [semesterName, setSemesterName] = useState < String || null > "";
   const onDelete = (e: any) => {
     e.preventDefault();
     deleteSemester({
@@ -200,6 +201,15 @@ const AddSemesterForm = () => {
                   จัดการปีการศึกษา
                 </Text>
                 <Box overflowY="auto" overflowX="auto">
+                  <Button
+                    leftIcon={<RepeatIcon />}
+                    colorScheme="teal"
+                    size="sm"
+                    margin={3}
+                    onClick={() => refetch()}
+                  >
+                    รีเฟรช
+                  </Button>
                   <Table variant="striped" overflow="auto" colorScheme="blue">
                     <Thead>
                       <Tr>
