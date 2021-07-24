@@ -332,7 +332,9 @@ const AddTopicForm = () => {
                         defaultValue="segun"
                         onChange={(e) => setCategory(e.target.value)}
                       >
-                        <option>เลือกองค์ประกอบ</option>
+                        <option onSelect={(e) => setCategory("")}>
+                          เลือกองค์ประกอบ
+                        </option>
                         {data.AdminGetAllCategory.map(
                           (item: any, index: number) => (
                             <>
