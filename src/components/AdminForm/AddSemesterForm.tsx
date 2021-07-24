@@ -110,6 +110,7 @@ const AddSemesterForm = () => {
           position: "top-right",
           duration: 10000,
         });
+        setSemesterName("");
         refetch();
       })
       .catch(() => {
@@ -187,6 +188,7 @@ const AddSemesterForm = () => {
                     <Input
                       type="text"
                       onChange={(e) => setSemesterName(e.target.value)}
+                      value={semesterName}
                     />
                     <FormHelperText>
                       ตัวเลข หรือ ข้อความ เช่น "ปีการศึกษา 2565"
