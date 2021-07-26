@@ -149,73 +149,75 @@ const UploadDocumentForm = (props: any) => {
 
       {!loading && !error && data ? (
         <>
-          <Table
-            variant="striped"
-            colorScheme="blue"
-            fontFamily="Kanit"
-            fontWeight="light"
-          >
-            <TableCaption>
-              *ไฟล์ที่ถูกลบแล้ว จะถูกลบออกจากระบบอย่างถาวร ไม่สามารถกู้คืนได้*
-            </TableCaption>
-            <Thead>
-              <Tr>
-                <Th>ลำดับ</Th>
-                <Th>ชื่อไฟล์เอกสาร</Th>
-                <Th>Action</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {data.getFileUploadList.map((item: any, index: number) => (
+          <Box overflowX="auto">
+            <Table
+              variant="striped"
+              colorScheme="blue"
+              fontFamily="Kanit"
+              fontWeight="light"
+            >
+              <TableCaption>
+                *ไฟล์ที่ถูกลบแล้ว จะถูกลบออกจากระบบอย่างถาวร ไม่สามารถกู้คืนได้*
+              </TableCaption>
+              <Thead>
                 <Tr>
-                  <Td>{item.index}</Td>
-                  <Td>{item.title}</Td>
-                  <Td>
-                    <Menu>
-                      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                        ตัวเลือก
-                      </MenuButton>
-                      <MenuList>
-                        <MenuItem
-                          onClick={(e) => window.open(item.fileUrl, "_blank")}
-                        >
-                          <DownloadIcon />
-                          <Text px={2}>ดาวน์โหลดไฟล์เอกสาร</Text>
-                        </MenuItem>
-                        <MenuItem
-                          onClick={() =>
-                            navigator.clipboard.writeText(item.fileUrl)
-                          }
-                        >
-                          <LinkIcon />
-                          <Text px={2}> คัดลอกลิงก์</Text>
-                        </MenuItem>
-                        <MenuItem isDisabled={true}>
-                          <EditIcon />
-                          <Text px={2}> แก้ไข</Text>
-                        </MenuItem>
-                        <MenuItem isDisabled={true}>
-                          {" "}
-                          <DeleteIcon color="red.400" />
-                          <Text px={2} color="red.400">
-                            {" "}
-                            ลบ
-                          </Text>
-                        </MenuItem>
-                      </MenuList>
-                    </Menu>
-                  </Td>
+                  <Th>ลำดับ</Th>
+                  <Th>ชื่อไฟล์เอกสาร</Th>
+                  <Th>Action</Th>
                 </Tr>
-              ))}
-            </Tbody>
-            <Tfoot>
-              <Tr>
-                <Th>ลำดับ</Th>
-                <Th>ชื่อไฟล์เอกสาร</Th>
-                <Th>Action</Th>
-              </Tr>
-            </Tfoot>
-          </Table>
+              </Thead>
+              <Tbody>
+                {data.getFileUploadList.map((item: any, index: number) => (
+                  <Tr>
+                    <Td>{item.index}</Td>
+                    <Td>{item.title}</Td>
+                    <Td>
+                      <Menu>
+                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                          ตัวเลือก
+                        </MenuButton>
+                        <MenuList>
+                          <MenuItem
+                            onClick={(e) => window.open(item.fileUrl, "_blank")}
+                          >
+                            <DownloadIcon />
+                            <Text px={2}>ดาวน์โหลดไฟล์เอกสาร</Text>
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() =>
+                              navigator.clipboard.writeText(item.fileUrl)
+                            }
+                          >
+                            <LinkIcon />
+                            <Text px={2}> คัดลอกลิงก์</Text>
+                          </MenuItem>
+                          <MenuItem isDisabled={true}>
+                            <EditIcon />
+                            <Text px={2}> แก้ไข</Text>
+                          </MenuItem>
+                          <MenuItem isDisabled={true}>
+                            {" "}
+                            <DeleteIcon color="red.400" />
+                            <Text px={2} color="red.400">
+                              {" "}
+                              ลบ
+                            </Text>
+                          </MenuItem>
+                        </MenuList>
+                      </Menu>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+              <Tfoot>
+                <Tr>
+                  <Th>ลำดับ</Th>
+                  <Th>ชื่อไฟล์เอกสาร</Th>
+                  <Th>Action</Th>
+                </Tr>
+              </Tfoot>
+            </Table>
+          </Box>
           {/* <form onSubmit={handleSubmit}>
             {data.getHasTopicList.hasTopicList ? (
               <>
