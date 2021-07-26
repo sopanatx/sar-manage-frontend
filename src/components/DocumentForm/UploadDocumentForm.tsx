@@ -190,11 +190,11 @@ const UploadDocumentForm = (props: any) => {
                           <LinkIcon />
                           <Text px={2}> คัดลอกลิงก์</Text>
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem isDisabled={true}>
                           <EditIcon />
                           <Text px={2}> แก้ไข</Text>
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem isDisabled={true}>
                           {" "}
                           <DeleteIcon color="red.400" />
                           <Text px={2} color="red.400">
