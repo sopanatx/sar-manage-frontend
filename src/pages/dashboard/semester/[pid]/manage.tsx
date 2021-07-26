@@ -51,6 +51,7 @@ import {
   InputGroup,
   useToast,
 } from "@chakra-ui/react";
+import Footer from "../../../../components/layout/Footer";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FiFile } from "react-icons/fi";
 import { useRouter } from "next/router";
@@ -153,7 +154,7 @@ const ManageDocument = () => {
                               <Link
                                 color="blue.500"
                                 as="span"
-                                onClick={() => handleClick(item.id)}
+                                onClick={() => setStateSubCategory(item.id)}
                               >
                                 {item.subCategoryName}
                               </Link>
@@ -172,47 +173,12 @@ const ManageDocument = () => {
                     borderRadius="lg"
                     overflow="hidden"
                   >
-                    {isSelectedTopic ? (
-                      <>
-                        <Text
-                          fontSize="lg"
-                          fontWeight="bold"
-                          py={5}
-                          color="red.500"
-                        >
-                          กรุณาเลือกหัวข้อ
-                        </Text>
-                        {res1.data && !res1.loading ? (
-                          <>
-                            <>
-                              <UploadDocumentForm
-                                semester={pid}
-                                subCategory={stateSubCategory}
-                              />
-                            </>
-                          </>
-                        ) : (
-                          <>
-                            <Spinner
-                              thickness="4px"
-                              speed="0.65s"
-                              emptyColor="gray.200"
-                              color="blue.500"
-                              size="xl"
-                            />
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <Text
-                        fontSize="lg"
-                        fontWeight="bold"
-                        py={5}
-                        color="red.500"
-                      >
-                        โปรดเลือกหัวข้อที่ต้องการจัดการเอกสาร
-                      </Text>
-                    )}
+                    <>
+                      <UploadDocumentForm
+                        semester={pid}
+                        subCategory={stateSubCategory}
+                      />
+                    </>
                   </Box>
                 </SimpleGrid>
               </>
@@ -232,6 +198,7 @@ const ManageDocument = () => {
           </Box>
         </Flex>
       </Box>
+      <Footer />
     </Box>
   );
 };
