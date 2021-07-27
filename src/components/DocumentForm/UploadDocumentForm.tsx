@@ -51,6 +51,16 @@ import {
   InputGroup,
   useToast,
   Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Editable,
+  EditableInput,
+  EditablePreview,
 } from "@chakra-ui/react";
 import {
   ChevronDownIcon,
@@ -59,6 +69,7 @@ import {
   EditIcon,
   DeleteIcon,
   CloseIcon,
+  RepeatIcon,
 } from "@chakra-ui/icons";
 import { FiFile } from "react-icons/fi";
 import GET_TOPIC_DOCUMENT from "../../queries/getTopicDocument";
@@ -75,8 +86,13 @@ const UploadDocumentForm = (props: any) => {
   const [selectedFile, setSelectedFile] = useState<any | null>();
   const [isSelectedTopic, setIsSelectedTopic] = useState<Boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef<any>();
 
+  const btnRef = useRef<any>();
+  const [editDocument, setEditDocument] = useState({
+    id: "",
+    title: "",
+    index: "",
+  });
   const onFileChange = (event: any) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -140,6 +156,10 @@ const UploadDocumentForm = (props: any) => {
       );
   };
 
+  const onRefetch = (e) => {
+    e.preventDefault();
+    refetch();
+  };
   return (
     <>
       <Text fontWeight="bold" fontSize="20px" color="black.200">
@@ -149,7 +169,7 @@ const UploadDocumentForm = (props: any) => {
 
       {!loading && !error && data ? (
         <>
-          <Box overflowX="auto">
+          <Box overflowX="auto" overflow="auto">
             <Table
               variant="striped"
               colorScheme="blue"
@@ -191,7 +211,7 @@ const UploadDocumentForm = (props: any) => {
                             <LinkIcon />
                             <Text px={2}> คัดลอกลิงก์</Text>
                           </MenuItem>
-                          <MenuItem isDisabled={true}>
+                          <MenuItem isDisabled={false}>
                             <EditIcon />
                             <Text px={2}> แก้ไข</Text>
                           </MenuItem>
@@ -271,7 +291,7 @@ const UploadDocumentForm = (props: any) => {
           </form> */}
           <>
             <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-              Open
+              อัปโหลดเอกสารใหม่
             </Button>
             <Drawer
               isOpen={isOpen}
@@ -282,7 +302,7 @@ const UploadDocumentForm = (props: any) => {
               <DrawerOverlay />
               <DrawerContent>
                 <DrawerHeader borderBottomWidth="1px">
-                  Create a new account
+                  อัปโหลดเอกสารใหม่
                 </DrawerHeader>
                 <DrawerBody>
                   <Stack spacing={24}>

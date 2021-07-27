@@ -121,6 +121,7 @@ const ManageDocument = () => {
             borderRadius={8}
             textAlign="center"
             bg="white"
+            overflowX="auto"
             overflow="auto"
           >
             <Heading color="gray.600">
