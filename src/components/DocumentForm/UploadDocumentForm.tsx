@@ -76,6 +76,7 @@ import GET_TOPIC_DOCUMENT from "../../queries/getTopicDocument";
 import UPLOAD_FILE from "../../mutation/uploadFile";
 import GET_FILE_UPLOAD_LIST from "../../queries/getFileUploadList";
 import GET_PRESIGNED_LINK from "../../queries/getPresignedLink";
+import UPDATE_DOCUMENT from "../../mutation/UpdateDocument";
 const UploadDocumentForm = (props: any) => {
   const { semester, subCategory } = props;
   const toast = useToast();
@@ -86,6 +87,11 @@ const UploadDocumentForm = (props: any) => {
   const [selectedFile, setSelectedFile] = useState<any | null>();
   const [isSelectedTopic, setIsSelectedTopic] = useState<Boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenEdit,
+    onOpen: onOpenEdit,
+    onClose: onCloseEdit,
+  } = useDisclosure();
 
   const btnRef = useRef<any>();
   const [editDocument, setEditDocument] = useState({
@@ -93,6 +99,8 @@ const UploadDocumentForm = (props: any) => {
     title: "",
     index: "",
   });
+  const [editTile, setEditTitle] = useState("");
+  const [editIndex, setEditIndex] = useState("");
   const onFileChange = (event: any) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -115,6 +123,7 @@ const UploadDocumentForm = (props: any) => {
     useLazyQuery(GET_PRESIGNED_LINK, {
       fetchPolicy: "no-cache",
     });
+  const [updateDocument, {}] = useMutation(UPDATE_DOCUMENT);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -156,9 +165,55 @@ const UploadDocumentForm = (props: any) => {
       );
   };
 
-  const onRefetch = (e) => {
-    e.preventDefault();
-    refetch();
+  const handleEdit = (event: any, data: any) => {
+    const { id, title, index } = data;
+
+    setEditDocument(data);
+    setEditTitle(title);
+    setEditIndex(index);
+    onOpenEdit();
+  };
+
+  const handleUpdate = (event: any) => {
+    updateDocument({
+      variables: {
+        updateDocument: {
+          documentId: editDocument.id,
+          title: editTile,
+          index: editIndex,
+        },
+      },
+    })
+      .then(() => {
+        toast({
+          title: `สำเร็จ`,
+          status: "success",
+          description: `ปรับปรุงเอกสารสำเร็จแล้ว`,
+          isClosable: true,
+          position: "top-right",
+          duration: 5000,
+        });
+        onCloseEdit();
+        setEditDocument({
+          id: "",
+          title: "",
+          index: "",
+        });
+        setEditTitle("");
+        setEditIndex("");
+        refetch();
+      })
+      .catch((e) => {
+        toast({
+          title: `ดำเนินการไม่สำเร็จ`,
+          status: "error",
+          description: `${e}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 5000,
+        });
+      });
+    onCloseEdit();
   };
   return (
     <>
@@ -211,7 +266,16 @@ const UploadDocumentForm = (props: any) => {
                             <LinkIcon />
                             <Text px={2}> คัดลอกลิงก์</Text>
                           </MenuItem>
-                          <MenuItem isDisabled={false}>
+                          <MenuItem
+                            isDisabled={false}
+                            onClick={(e) =>
+                              handleEdit(e, {
+                                id: item.id,
+                                title: item.title,
+                                index: item.index,
+                              })
+                            }
+                          >
                             <EditIcon />
                             <Text px={2}> แก้ไข</Text>
                           </MenuItem>
@@ -368,6 +432,42 @@ const UploadDocumentForm = (props: any) => {
                 </DrawerBody>
               </DrawerContent>
             </Drawer>
+          </>
+          <>
+            <Modal isOpen={isOpenEdit} onClose={onCloseEdit}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>แก้ไขเอกสาร : </ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <form>
+                    <FormControl>
+                      <FormLabel>ชื่อเรื่อง : </FormLabel>
+                      <Input
+                        value={editTile}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>ลำดับ : </FormLabel>
+                      <Input
+                        value={editIndex}
+                        onChange={(e) => setEditIndex(e.target.value)}
+                      />
+                    </FormControl>
+                  </form>
+                </ModalBody>
+
+                <ModalFooter>
+                  <Button mr={3} onClick={onCloseEdit}>
+                    ยกเลิก
+                  </Button>
+                  <Button colorScheme="blue" onClick={(e) => handleUpdate(e)}>
+                    ปรับปรุงข้อมูล
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
           </>
         </>
       ) : (
