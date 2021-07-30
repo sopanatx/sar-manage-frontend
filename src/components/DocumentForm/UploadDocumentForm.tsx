@@ -61,6 +61,12 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
 } from "@chakra-ui/react";
 import {
   ChevronDownIcon,
@@ -77,6 +83,7 @@ import UPLOAD_FILE from "../../mutation/uploadFile";
 import GET_FILE_UPLOAD_LIST from "../../queries/getFileUploadList";
 import GET_PRESIGNED_LINK from "../../queries/getPresignedLink";
 import UPDATE_DOCUMENT from "../../mutation/UpdateDocument";
+import DELETE_DOCUMENTS_MUTATION from "../../mutation/deleteDocuments";
 const UploadDocumentForm = (props: any) => {
   const { semester, subCategory } = props;
   const toast = useToast();
@@ -84,6 +91,7 @@ const UploadDocumentForm = (props: any) => {
   const [filename, setFilename] = useState<String>("");
   const [fileIndex, setFileIndex] = useState<String>("");
   const [uploadFile, {}] = useMutation(UPLOAD_FILE);
+  const [deleteDocument, {}] = useMutation(DELETE_DOCUMENTS_MUTATION);
   const [selectedFile, setSelectedFile] = useState<any | null>();
   const [isSelectedTopic, setIsSelectedTopic] = useState<Boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -93,11 +101,24 @@ const UploadDocumentForm = (props: any) => {
     onClose: onCloseEdit,
   } = useDisclosure();
 
+  interface isOpenType {
+    dialog: boolean;
+    id: string;
+    name: string;
+  }
+
+  const [isOpenDelete, setIsOpenDelete] = useState<isOpenType>({
+    dialog: false,
+    id: "",
+    name: "",
+  });
+  const onCloseDelete = () =>
+    setIsOpenDelete({ dialog: false, id: "", name: "" });
+  const cancelRef = useRef<any>();
   const btnRef = useRef<any>();
   const [editDocument, setEditDocument] = useState({
     id: "",
     title: "",
-    index: "",
   });
   const [editTile, setEditTitle] = useState("");
   const [editIndex, setEditIndex] = useState("");
@@ -197,7 +218,6 @@ const UploadDocumentForm = (props: any) => {
         setEditDocument({
           id: "",
           title: "",
-          index: "",
         });
         setEditTitle("");
         setEditIndex("");
@@ -215,6 +235,38 @@ const UploadDocumentForm = (props: any) => {
       });
     onCloseEdit();
   };
+
+  const handleDelete = () => {
+    deleteDocument({
+      variables: {
+        deleteDocument: {
+          documentId: isOpenDelete.id,
+        },
+      },
+    })
+      .then(() => {
+        toast({
+          title: `สำเร็จ`,
+          status: "success",
+          description: `ลบเอกสารสำเร็จแล้ว`,
+          isClosable: true,
+          position: "top-right",
+          duration: 5000,
+        });
+        setIsOpenDelete({ dialog: false, id: "", name: "" });
+        refetch();
+      })
+      .catch((e) => {
+        toast({
+          title: `ดำเนินการไม่สำเร็จ`,
+          status: "error",
+          description: `${e}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 5000,
+        });
+      });
+  };
   return (
     <>
       <Text fontWeight="bold" fontSize="20px" color="black.200">
@@ -222,6 +274,37 @@ const UploadDocumentForm = (props: any) => {
         รายการไฟล์{" "}
       </Text>
 
+      <AlertDialog
+        isOpen={isOpenDelete.dialog}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              ยืนยันการลบเอกสาร
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              คุณแน่ใจว่าจะลบเอกสาร
+              <Text fontWeight="bold" color="red.400">
+                {isOpenDelete.name}{" "}
+              </Text>{" "}
+              {""}เมื่อดำเนินการลบแล้ว เอกสารจะถูกลบออกจากระบบอย่างถาวร
+              ไม่สามารถกู้คืนได้
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onCloseDelete}>
+                ยกเลิก
+              </Button>
+              <Button colorScheme="red" ml={3} onClick={() => handleDelete()}>
+                ยืนยันการลบ
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
       {!loading && !error && data ? (
         <>
           <Box overflowX="auto" overflow="auto">
@@ -279,7 +362,16 @@ const UploadDocumentForm = (props: any) => {
                             <EditIcon />
                             <Text px={2}> แก้ไข</Text>
                           </MenuItem>
-                          <MenuItem isDisabled={true}>
+                          <MenuItem
+                            isDisabled={false}
+                            onClick={(e) =>
+                              setIsOpenDelete({
+                                dialog: true,
+                                id: item.id,
+                                name: item.title,
+                              })
+                            }
+                          >
                             {" "}
                             <DeleteIcon color="red.400" />
                             <Text px={2} color="red.400">
