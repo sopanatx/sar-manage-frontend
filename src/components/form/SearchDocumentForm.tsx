@@ -34,8 +34,23 @@ import SEARCH_FILE_BY_NAME from "../../mutation/searchFileByName";
 import { Form } from "formik";
 
 const SearchDocumentForm = () => {
-  const [searchSemester, {}] = useMutation(SEARCH_FILE_BY_NAME);
+  const [searchFile, {}] = useMutation(SEARCH_FILE_BY_NAME);
   const [searchInput, setSearchInput] = useState("");
+  const onSearch = (event: any) => {
+    event.preventDefault();
+    searchFile({
+      variables: {
+        searchDocumentByName: {
+          name: searchInput,
+        },
+      },
+    })
+      .then((result) => {})
+      .catch((error) => {
+        console.log("[LOG] Not found file to search");
+      });
+  };
+
   return (
     <>
       <Box bg="blue.100">
@@ -63,10 +78,47 @@ const SearchDocumentForm = () => {
                   type="search"
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
+                <Button colorScheme="blue" px={5} onClick={(e) => onSearch(e)}>
+                  ค้นหา
+                </Button>
               </FormControl>
-              <Button colorScheme="blue" px={5}>
-                ค้นหา
-              </Button>
+
+              <Table variant="striped" colorScheme="teal">
+                <TableCaption>
+                  Imperial to metric conversion factors
+                </TableCaption>
+                <Thead>
+                  <Tr>
+                    <Th>To convert</Th>
+                    <Th>into</Th>
+                    <Th isNumeric>multiply by</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>inches</Td>
+                    <Td>millimetres (mm)</Td>
+                    <Td isNumeric>25.4</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>feet</Td>
+                    <Td>centimetres (cm)</Td>
+                    <Td isNumeric>30.48</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>yards</Td>
+                    <Td>metres (m)</Td>
+                    <Td isNumeric>0.91444</Td>
+                  </Tr>
+                </Tbody>
+                <Tfoot>
+                  <Tr>
+                    <Th>To convert</Th>
+                    <Th>into</Th>
+                    <Th isNumeric>multiply by</Th>
+                  </Tr>
+                </Tfoot>
+              </Table>
             </form>
           </Box>
         </Flex>
