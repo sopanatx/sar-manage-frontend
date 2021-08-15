@@ -89,7 +89,7 @@ const SearchDocumentForm = () => {
                   {" "}
                   <Table variant="striped" colorScheme="blue" overflow="auto">
                     <TableCaption>
-                      *ท่านสามารถดาวน์โหลดเอกสารได้อย่างเดียวจากระบบค้นหา*
+                      *ท่านสามารถดาวน์โหลดเอกสารได้อย่างเดียวเท่านั้นจากระบบค้นหา*
                     </TableCaption>
                     <Thead>
                       <Tr>
