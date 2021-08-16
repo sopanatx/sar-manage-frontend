@@ -10,6 +10,7 @@
     "start": "next start",
     "prettify": "prettier --write src/*"
   },
+  "node": ">=8.0.0",
   "dependencies": {
     "@apollo/client": "^3.3.21",
     "@chakra-ui/icons": "^1.0.14",
