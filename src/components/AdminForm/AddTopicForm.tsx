@@ -58,6 +58,7 @@ import { useState, useRef } from "react";
 import ADMIN_GET_ALL_CATEGORY from "../../queries/AdminGetAllCategory";
 import ADMIN_ADD_SUB_CATEGORY_MUTATION from "../../mutation/AdminAddSubCategory";
 import ADMIN_DELETE_SUB_CATEGORY_MUTATION from "../../mutation/AdminDeleteSubCategory";
+import ADMIN_UPDATE_SUBCATEGORY_MUTATION from "../../mutation/AdminUpdateSubCategory";
 interface isOpenType {
   dialog: boolean;
   id: string;
@@ -75,12 +76,28 @@ const AddTopicForm = () => {
     fetchPolicy: "no-cache",
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpen2,
+    onOpen: onOpen2,
+    onClose: onClose2,
+  } = useDisclosure();
+  const cancelRef = useRef<any>();
+  const cancelRef2 = useRef<any>();
+
   const firstField = useRef<any>();
   const [category, setCategory] = useState<String>("");
   const [subCategory, setSubCategory] = useState<String>("");
+
+  const [currentSubCategory, setCurrentSubCategory] = useState({
+    uid: 0,
+    name: "",
+  });
   const [addSubCategory, {}] = useMutation(ADMIN_ADD_SUB_CATEGORY_MUTATION);
   const [deleteSubCategory, {}] = useMutation(
     ADMIN_DELETE_SUB_CATEGORY_MUTATION
+  );
+  const [updateSubCategory, {}] = useMutation(
+    ADMIN_UPDATE_SUBCATEGORY_MUTATION
   );
   const [subCategoryDelete, setSubCategoryDelete] =
     useState<deleteSubCategoryType>({
@@ -90,7 +107,6 @@ const AddTopicForm = () => {
     });
   const onCloseAlert = () =>
     setSubCategoryDelete({ isShow: false, id: 0, name: "" });
-  const cancelRef = useRef<any>();
   const onSubmit = (e: any) => {
     e.preventDefault();
     addSubCategory({
@@ -160,6 +176,43 @@ const AddTopicForm = () => {
       });
   };
 
+  const onEditSubmit = (e: any) => {
+    e.preventDefault();
+    console.log("Id : %s", currentSubCategory.uid);
+    updateSubCategory({
+      variables: {
+        adminUpdateSubCategory: {
+          id: +currentSubCategory.uid,
+          subCategoryName: currentSubCategory.name,
+        },
+      },
+    })
+      .then((result) => {
+        toast({
+          title: `ดำเนินการสำเร็จ`,
+          status: "success",
+          description: `แก้ไขสำเร็จ`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+
+        refetch();
+        onClose2();
+        setCurrentSubCategory({ uid: 0, name: "" });
+      })
+      .catch((err) => {
+        toast({
+          title: `ไม่สามารถเพิ่มตัวบ่งชี้นี้ได้`,
+          status: "error",
+          description: `${err.message.replace("GraphQL error:", "")}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+      });
+  };
+
   return (
     <>
       <AlertDialog
@@ -193,6 +246,7 @@ const AddTopicForm = () => {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+
       <Box bg="blue.100">
         <Flex
           minHeight="100vh"
@@ -265,6 +319,13 @@ const AddTopicForm = () => {
                               icon={<EditIcon />}
                               variant="solid"
                               size="sm"
+                              onClick={() => {
+                                setCurrentSubCategory({
+                                  uid: +item.id,
+                                  name: item.subCategoryName,
+                                });
+                                onOpen2();
+                              }}
                             />
                             <IconButton
                               colorScheme="red"
@@ -369,6 +430,51 @@ const AddTopicForm = () => {
                     onClick={(e) => onSubmit(e)}
                   >
                     เพิ่มข้อมูล
+                  </Button>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </>
+          <>
+            {" "}
+            <Drawer
+              isOpen={isOpen2}
+              placement="right"
+              initialFocusRef={firstField}
+              onClose={onClose2}
+            >
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="2px">
+                  แก้ไขตัวบ่งชี้
+                </DrawerHeader>
+
+                <DrawerBody>
+                  <Stack spacing="24px">
+                    <Box>
+                      <FormControl>
+                        <FormLabel htmlFor="owner">ชื่อองค์ประกอบ</FormLabel>
+                        <Input
+                          value={currentSubCategory.name}
+                          onChange={(e) =>
+                            setCurrentSubCategory({
+                              uid: currentSubCategory.uid,
+                              name: e.target.value,
+                            })
+                          }
+                        />
+                      </FormControl>
+                    </Box>
+                  </Stack>
+                </DrawerBody>
+
+                <DrawerFooter borderTopWidth="2px">
+                  <Button variant="outline" mr={3} onClick={onClose2}>
+                    ยกเลิก
+                  </Button>
+                  <Button colorScheme="blue" onClick={(e) => onEditSubmit(e)}>
+                    บันทีก
                   </Button>
                 </DrawerFooter>
               </DrawerContent>
