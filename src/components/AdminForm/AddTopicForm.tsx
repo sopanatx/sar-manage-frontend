@@ -194,7 +194,7 @@ const AddTopicForm = () => {
           description: `แก้ไขสำเร็จ`,
           isClosable: true,
           position: "top-right",
-          duration: 10000,
+          duration: 3000,
         });
 
         refetch();
@@ -208,7 +208,7 @@ const AddTopicForm = () => {
           description: `${err.message.replace("GraphQL error:", "")}`,
           isClosable: true,
           position: "top-right",
-          duration: 10000,
+          duration: 3000,
         });
       });
   };
