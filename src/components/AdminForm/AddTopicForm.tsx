@@ -474,7 +474,7 @@ const AddTopicForm = () => {
                     ยกเลิก
                   </Button>
                   <Button colorScheme="blue" onClick={(e) => onEditSubmit(e)}>
-                    บันทีก
+                    บันทึก
                   </Button>
                 </DrawerFooter>
               </DrawerContent>
