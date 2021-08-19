@@ -44,7 +44,8 @@ const SemesterSelect = () => {
 
             <Alert status="info" variant="subtle" margin={2} borderRadius={9}>
               <AlertIcon />
-              ระบบจะนำทางไปยังหน้าจัดการเอกสารเมื่อท่านได้เลือกปีการศึกษาแล้ว
+              ระบบจะแสดงเอกสารที่มีอยู่ในปีการศึกษาที่เลือกเท่านั้น
+              โปรดตรวจสอบให้แน่ใจแล้วจึงกดตกลง
             </Alert>
 
             {!loading && !error && data ? (
