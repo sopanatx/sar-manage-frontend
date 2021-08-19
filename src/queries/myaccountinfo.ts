@@ -12,4 +12,4 @@ const MY_ACCOUNT_INFO = gql`
   }
 `;
 
-export default MY_ACCOUNT_INFO
+export default MY_ACCOUNT_INFO;
