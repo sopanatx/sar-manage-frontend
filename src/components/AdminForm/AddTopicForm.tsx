@@ -81,8 +81,14 @@ const AddTopicForm = () => {
     onOpen: onOpen2,
     onClose: onClose2,
   } = useDisclosure();
+  const {
+    isOpen: isOpen3,
+    onOpen: onOpen3,
+    onClose: onClose3,
+  } = useDisclosure();
   const cancelRef = useRef<any>();
   const cancelRef2 = useRef<any>();
+  const cancelRef3 = useRef<any>();
 
   const firstField = useRef<any>();
   const [category, setCategory] = useState<String>("");
@@ -246,6 +252,30 @@ const AddTopicForm = () => {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+
+      <>
+        <AlertDialog
+          isOpen={isOpen3}
+          leastDestructiveRef={cancelRef3}
+          onClose={onClose3}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                เพิ่มหมวดหมู่ของตัวบ่งชี้
+              </AlertDialogHeader>
+
+              <AlertDialogBody></AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button ref={cancelRef3} onClick={onClose3}>
+                  ยกเลิก
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+      </>
 
       <Box bg="blue.100">
         <Flex

@@ -25,10 +25,29 @@ import {
   Spinner,
   Stack,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,
 } from "@chakra-ui/react";
+
 import GET_ALL_SEMESTERS_QUERY from "../../queries/AdminGetAllSemester";
 import { useQuery, useMutation } from "@apollo/client";
-import { CloseIcon, RepeatIcon } from "@chakra-ui/icons";
+import {
+  ChevronDownIcon,
+  DownloadIcon,
+  LinkIcon,
+  EditIcon,
+  DeleteIcon,
+  CloseIcon,
+  RepeatIcon,
+} from "@chakra-ui/icons";
 import { useState, useRef } from "react";
 import SEARCH_FILE_BY_NAME from "../../mutation/searchFileByName";
 import { Form } from "formik";
@@ -107,7 +126,36 @@ const SearchDocumentForm = () => {
                               <Td>
                                 {item.index} {item.title}
                               </Td>
-                              <Td></Td>
+                              <Td>
+                                <Menu>
+                                  <MenuButton
+                                    as={Button}
+                                    rightIcon={<ChevronDownIcon />}
+                                  >
+                                    ตัวเลือก
+                                  </MenuButton>
+                                  <MenuList>
+                                    <MenuItem
+                                      onClick={(e) =>
+                                        window.open(item.fileUrl, "_blank")
+                                      }
+                                    >
+                                      <DownloadIcon />
+                                      <Text px={2}>ดาวน์โหลดไฟล์เอกสาร</Text>
+                                    </MenuItem>
+                                    <MenuItem
+                                      onClick={() =>
+                                        navigator.clipboard.writeText(
+                                          item.fileUrl
+                                        )
+                                      }
+                                    >
+                                      <LinkIcon />
+                                      <Text px={2}> คัดลอกลิงก์</Text>
+                                    </MenuItem>
+                                  </MenuList>
+                                </Menu>
+                              </Td>
                             </Tr>
                           </>
                         )
