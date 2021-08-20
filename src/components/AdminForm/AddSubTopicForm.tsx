@@ -58,6 +58,7 @@ import GET_TOPIC_BY_SUBCATEGORIES from "../../queries/getTopicBySubCategories";
 import ADMIN_ADD_TOPIC from "../../mutation/AdminAddTopic";
 
 import { Form } from "formik";
+import ADMIN_GET_TOPIC_BY_SUBCATEGORIES from "../../queries/AdminGetTopicBySubCategories";
 
 const AddSubTopicForm = ({ TopicId }: any) => {
   const toast = useToast();
@@ -65,11 +66,14 @@ const AddSubTopicForm = ({ TopicId }: any) => {
   const cancelRef = useRef<any>();
   const [topicInput, setTopicInput] = useState("");
   const { data, loading, error, refetch } = useQuery(
-    GET_TOPIC_BY_SUBCATEGORIES,
+    ADMIN_GET_TOPIC_BY_SUBCATEGORIES,
     {
       variables: {
         getTopicBySubCategories: {
           subCategoryId: +TopicId,
+        },
+        getSubCategoryInfo: {
+          id: +TopicId,
         },
       },
       fetchPolicy: "no-cache",
@@ -246,6 +250,7 @@ const AddSubTopicForm = ({ TopicId }: any) => {
                         leftIcon={<AddIcon />}
                         colorScheme="blue"
                         variant="outline"
+                        onClick={onOpen}
                       >
                         สร้างหัวข้อใหม่
                       </Button>
