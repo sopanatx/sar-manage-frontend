@@ -52,8 +52,9 @@ import {
   AlertDescription,
   CloseButton,
 } from "@chakra-ui/react";
+import router from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
-import { CloseIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
+import { CloseIcon, EditIcon, AddIcon, SmallAddIcon } from "@chakra-ui/icons";
 import { useState, useRef } from "react";
 import ADMIN_GET_ALL_CATEGORY from "../../queries/AdminGetAllCategory";
 import ADMIN_ADD_SUB_CATEGORY_MUTATION from "../../mutation/AdminAddSubCategory";
@@ -342,6 +343,17 @@ const AddTopicForm = () => {
                             >
                               {item.subCategoryName}
                             </Link>
+                            <IconButton
+                              colorScheme="blue"
+                              aria-label="Edit"
+                              margin={3}
+                              icon={<SmallAddIcon />}
+                              variant="solid"
+                              size="sm"
+                              onClick={() =>
+                                router.push(`/admin/topic/${item.id}/add`)
+                              }
+                            />
                             <IconButton
                               colorScheme="green"
                               aria-label="Edit"
