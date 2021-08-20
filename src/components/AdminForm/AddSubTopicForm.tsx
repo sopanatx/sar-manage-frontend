@@ -56,7 +56,7 @@ import {
 import { useState, useRef } from "react";
 import GET_TOPIC_BY_SUBCATEGORIES from "../../queries/getTopicBySubCategories";
 import ADMIN_ADD_TOPIC from "../../mutation/AdminAddTopic";
-
+import ADMIN_DELETE_TOPIC from "../../mutation/AdminDeleteTopic";
 import { Form } from "formik";
 import ADMIN_GET_TOPIC_BY_SUBCATEGORIES from "../../queries/AdminGetTopicBySubCategories";
 
@@ -64,6 +64,17 @@ const AddSubTopicForm = ({ TopicId }: any) => {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<any>();
+  const {
+    isOpen: isOpen2,
+    onOpen: onOpen2,
+    onClose: onClose2,
+  } = useDisclosure();
+
+  const [currentDeleteId, setCurrentDeleteId] = useState({
+    id: 0,
+    name: "",
+  });
+  const cancelRef2 = useRef<any>();
   const [topicInput, setTopicInput] = useState("");
   const { data, loading, error, refetch } = useQuery(
     ADMIN_GET_TOPIC_BY_SUBCATEGORIES,
@@ -80,7 +91,7 @@ const AddSubTopicForm = ({ TopicId }: any) => {
     }
   );
   const [AddTopic, {}] = useMutation(ADMIN_ADD_TOPIC);
-
+  const [DeleteTopic] = useMutation(ADMIN_DELETE_TOPIC);
   const onSubmit = (values: any) => {
     AddTopic({
       variables: {
@@ -108,6 +119,39 @@ const AddSubTopicForm = ({ TopicId }: any) => {
           title: `ไม่สามารถเพิ่มหัวข้อนี้ได้`,
           status: "error",
           description: `${err.graphQLErrors[0].extensions.response.message}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+      });
+  };
+
+  const onDelete = (values: any) => {
+    DeleteTopic({
+      variables: {
+        adminDeleteTopic: {
+          topicId: +currentDeleteId.id,
+        },
+      },
+    })
+      .then(() => {
+        toast({
+          title: `สำเร็จ`,
+          status: "success",
+          description: `ลบหัวข้อสำเร็จแล้ว`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+        refetch();
+        onClose2();
+        setCurrentDeleteId({ id: 0, name: "" });
+      })
+      .catch((err) => {
+        toast({
+          title: `ไม่สามารถลบหัวข้อนี้ได้`,
+          status: "error",
+          description: `${err.message.replace("GraphQL error:", "")}`,
           isClosable: true,
           position: "top-right",
           duration: 10000,
@@ -159,6 +203,42 @@ const AddSubTopicForm = ({ TopicId }: any) => {
             </AlertDialogOverlay>
           </AlertDialog>
         </>
+
+        <>
+          <AlertDialog
+            isOpen={isOpen2}
+            leastDestructiveRef={cancelRef2}
+            onClose={onClose2}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  ลบข้อมูลหัวข้อ
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  คุณแน่ใจว่าจะลบหัวข้อ
+                  <Text fontWeight="bold" color="red.500">
+                    {" "}
+                    {currentDeleteId.name}{" "}
+                  </Text>
+                  การกระทำดังกล่าวจะไม่สามารถกู้คืนได้ หากตรวจสอบแน่ใจแล้ว
+                  ให้กดยืนยันการลบ
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef2} onClick={onClose2}>
+                    ยกเลิก
+                  </Button>
+                  <Button colorScheme="red" ml={3} onClick={(e) => onDelete(e)}>
+                    ยืนยันการลบข้อมูล
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
+        </>
+
         <Flex
           minHeight="100vh"
           width="full"
@@ -215,6 +295,13 @@ const AddSubTopicForm = ({ TopicId }: any) => {
                                         icon={<DeleteIcon />}
                                         variant="solid"
                                         size="sm"
+                                        onClick={() => {
+                                          setCurrentDeleteId({
+                                            id: item.id,
+                                            name: item.topicName,
+                                          });
+                                          onOpen2();
+                                        }}
                                       />
                                     </Td>
                                   </Tr>
