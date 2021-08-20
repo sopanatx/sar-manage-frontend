@@ -58,7 +58,6 @@ const SemesterSelect = () => {
                   onChange={(e) => setSemester(e.target.value)}
                   placeholder="เลือกปีการศึกษา"
                   variant="filled"
-
                 >
                   {data.getSemester.map((item: any, index: any) => (
                     <option value={item.id}>{item.semesterName}</option>
@@ -72,7 +71,7 @@ const SemesterSelect = () => {
                 </Stack>
               </>
             )}
-          </Box>ßß
+          </Box>
           <Button
             colorScheme="blue"
             onClick={() => router.push(`/dashboard/semester/${semester}`)}

@@ -259,15 +259,7 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: "จัดการเอกสาร",
     href: "/dashboard",
-    children: [
-      {
-        label: "จัดการเอกสาร",
-        subLabel: "จัดการ / แก้ไขเอกสารที่อัปโหลดไปแล้ว",
-        href: "#",
-      },
-    ],
   },
-
   {
     label: "จัดการบัญชี",
     href: "/account",
