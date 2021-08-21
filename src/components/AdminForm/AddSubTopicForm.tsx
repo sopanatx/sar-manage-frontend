@@ -57,6 +57,7 @@ import { useState, useRef } from "react";
 import GET_TOPIC_BY_SUBCATEGORIES from "../../queries/getTopicBySubCategories";
 import ADMIN_ADD_TOPIC from "../../mutation/AdminAddTopic";
 import ADMIN_DELETE_TOPIC from "../../mutation/AdminDeleteTopic";
+import ADMIN_UPDATE_TOPIC from "../../mutation/AdminUpdateTopic";
 import { Form } from "formik";
 import ADMIN_GET_TOPIC_BY_SUBCATEGORIES from "../../queries/AdminGetTopicBySubCategories";
 
@@ -74,7 +75,18 @@ const AddSubTopicForm = ({ TopicId }: any) => {
     id: 0,
     name: "",
   });
+  const [currentUpdate, setCurrentUpdate] = useState({
+    id: 0,
+    name: "",
+  });
+  const {
+    isOpen: isOpen3,
+    onOpen: onOpen3,
+    onClose: onClose3,
+  } = useDisclosure();
   const cancelRef2 = useRef<any>();
+  const cancelRef3 = useRef<any>();
+
   const [topicInput, setTopicInput] = useState("");
   const { data, loading, error, refetch } = useQuery(
     ADMIN_GET_TOPIC_BY_SUBCATEGORIES,
@@ -92,6 +104,7 @@ const AddSubTopicForm = ({ TopicId }: any) => {
   );
   const [AddTopic, {}] = useMutation(ADMIN_ADD_TOPIC);
   const [DeleteTopic] = useMutation(ADMIN_DELETE_TOPIC);
+  const [UpdateTopic] = useMutation(ADMIN_UPDATE_TOPIC);
   const onSubmit = (values: any) => {
     AddTopic({
       variables: {
@@ -159,6 +172,40 @@ const AddSubTopicForm = ({ TopicId }: any) => {
       });
   };
 
+  const onUpdate = (values: any) => {
+    UpdateTopic({
+      variables: {
+        adminUpdateTopic: {
+          topicId: +currentUpdate.id,
+          topicName: currentUpdate.name,
+        },
+      },
+    })
+      .then(() => {
+        toast({
+          title: `สำเร็จ`,
+          status: "success",
+          description: `บันทึกการแก้ไขหัวข้อสำเร็จแล้ว`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+        refetch();
+        onClose3();
+        setCurrentUpdate({ id: 0, name: "" });
+      })
+      .catch((err) => {
+        toast({
+          title: `ไม่สามารถแก้ไขหัวข้อนี้ได้`,
+          status: "error",
+          description: `${err.message.replace("GraphQL error:", "")}`,
+          isClosable: true,
+          position: "top-right",
+          duration: 10000,
+        });
+      });
+  };
+
   return (
     <>
       <Box bg="blue.100">
@@ -197,6 +244,54 @@ const AddSubTopicForm = ({ TopicId }: any) => {
                     ml={3}
                   >
                     เพิ่มหัวข้อ
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
+        </>
+
+        <>
+          <AlertDialog
+            isOpen={isOpen3}
+            leastDestructiveRef={cancelRef3}
+            onClose={onClose3}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  แก้ไขข้อมูล
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  <Text fontWeight="bold"> กรอกข้อมูลหัวข้อ</Text>
+                  <FormControl>
+                    <FormLabel htmlFor="name">ชื่อหัวข้อ :</FormLabel>
+                    <Input
+                      id="topicName"
+                      name="topicName"
+                      maxLength={50}
+                      value={currentUpdate.name}
+                      onChange={(e) =>
+                        setCurrentUpdate({
+                          ...currentUpdate,
+                          name: e.target.value,
+                        })
+                      }
+                    />
+                  </FormControl>
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef3} onClick={onClose3}>
+                    ยกเลิก
+                  </Button>
+                  <Button
+                    colorScheme="blue"
+                    onClick={(e) => onUpdate(e)}
+                    ml={3}
+                  >
+                    บันทึกการแก้ไข
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
@@ -287,6 +382,13 @@ const AddSubTopicForm = ({ TopicId }: any) => {
                                         icon={<EditIcon />}
                                         variant="solid"
                                         size="sm"
+                                        onClick={() => {
+                                          setCurrentUpdate({
+                                            id: item.id,
+                                            name: item.topicName,
+                                          });
+                                          onOpen3();
+                                        }}
                                       />
                                       <IconButton
                                         colorScheme="red"
