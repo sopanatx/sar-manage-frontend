@@ -228,7 +228,7 @@ const AddSubTopicForm = ({ TopicId }: any) => {
                     <Input
                       id="topicName"
                       name="topicName"
-                      maxLength={50}
+                      maxLength={1500}
                       onChange={(e) => setTopicInput(e.target.value)}
                     />
                   </FormControl>
@@ -270,7 +270,7 @@ const AddSubTopicForm = ({ TopicId }: any) => {
                     <Input
                       id="topicName"
                       name="topicName"
-                      maxLength={50}
+                      maxLength={1500}
                       value={currentUpdate.name}
                       onChange={(e) =>
                         setCurrentUpdate({
