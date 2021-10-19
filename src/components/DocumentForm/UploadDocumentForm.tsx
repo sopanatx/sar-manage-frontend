@@ -321,7 +321,7 @@ const UploadDocumentForm = (props: any) => {
                 <Tr>
                   <Th>ลำดับ</Th>
                   <Th>ชื่อไฟล์เอกสาร</Th>
-                  <Th>Action</Th>
+                  <Th>จัดการ</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -389,7 +389,7 @@ const UploadDocumentForm = (props: any) => {
                 <Tr>
                   <Th>ลำดับ</Th>
                   <Th>ชื่อไฟล์เอกสาร</Th>
-                  <Th>Action</Th>
+                  <Th>จัดการ</Th>
                 </Tr>
               </Tfoot>
             </Table>

@@ -362,7 +362,7 @@ const AddSubTopicForm = ({ TopicId }: any) => {
                           <Tr>
                             <Th>ลำดับ</Th>
                             <Th>ชื่อ</Th>
-                            <Th>ACTION</Th>
+                            <Th>จัดการ</Th>
                           </Tr>
                         </Thead>
                         <Tbody>

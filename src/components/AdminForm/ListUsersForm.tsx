@@ -189,7 +189,7 @@ const ListUsersForm = () => {
                         <Th>Username</Th>
                         <Th>อีเมล</Th>
                         <Th>สิทธิ์</Th>
-                        <Th>Action</Th>
+                        <Th>จัดการ</Th>
                       </Tr>
                     </Thead>
                     <Tbody>

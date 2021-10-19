@@ -114,7 +114,7 @@ const SearchDocumentForm = () => {
                       <Tr>
                         <Th>ปีการศึกษา</Th>
                         <Th>ชื่อเอกสาร</Th>
-                        <Th>Action</Th>
+                        <Th>จัดการ</Th>
                       </Tr>
                     </Thead>
                     <Tbody>

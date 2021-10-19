@@ -216,7 +216,7 @@ const AddSemesterForm = () => {
                       <Tr>
                         <Th>ลำดับ</Th>
                         <Th>ชื่อปีการศึกษา</Th>
-                        <Th>Action</Th>
+                        <Th>จัดการ</Th>
                       </Tr>
                     </Thead>
                     <Tbody>
